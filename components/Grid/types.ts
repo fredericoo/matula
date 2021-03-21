@@ -21,7 +21,7 @@ export interface ColProps {
 }
 
 interface ColSize {
-	col: string;
+	col?: string;
 	row?: string;
 	z?: number;
 	align?: string;
