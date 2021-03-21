@@ -4,7 +4,8 @@ export interface GridProps {
 	lg?: GridSize | string;
 	xl?: GridSize | string;
 	children: JSX.Element | JSX.Element[] | string;
-	props?: any;
+	style?: any;
+	className?: string;
 }
 
 interface GridSize {
@@ -17,7 +18,8 @@ export interface ColProps {
 	lg?: ColSize | string;
 	xl?: ColSize | string;
 	children: JSX.Element | JSX.Element[] | string;
-	props?: any;
+	style?: any;
+	className?: string;
 }
 
 interface ColSize {
