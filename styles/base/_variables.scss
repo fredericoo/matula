@@ -1,0 +1,18 @@
+:root {
+	--colour__bg: #ffffff;
+	--colour__main: var(--colour__blue);
+	--colour__accent: var(--colour__red);
+
+	--colour__red: #e66617;
+	--colour__cream: #f8efe5;
+	--colour__green: #bbcc98;
+	--colour__blue: #4c3688;
+	--colour__pink: #fcafc2;
+
+	--container__width: 1366px;
+	--sidebearing: calc((100vw - var(--container__width)) / 2);
+
+	--gutter: 2rem;
+
+	--easing: cubic-bezier(0.16, 1, 0.3, 1);
+}
