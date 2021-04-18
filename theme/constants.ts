@@ -1,3 +1,5 @@
+export type Breakpoint = "sm" | "md" | "lg" | "xl";
+
 const constants = {
 	info: {
 		title: "Matula Film Festival",
