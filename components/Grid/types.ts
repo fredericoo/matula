@@ -1,31 +1,20 @@
-export interface GridProps {
-	sm?: GridSize | string;
-	md?: GridSize | string;
-	lg?: GridSize | string;
-	xl?: GridSize | string;
-	children: JSX.Element | JSX.Element[] | string;
-	style?: any;
-	className?: string;
-}
+export type Breakpoint = "sm" | "md" | "lg" | "xl";
 
+export type GridProps = {
+	[key in Breakpoint]?: GridSize | string;
+};
 interface GridSize {
 	gap: string;
+	cols: number;
 }
 
-export interface ColProps {
-	sm?: ColSize | string;
-	md?: ColSize | string;
-	lg?: ColSize | string;
-	xl?: ColSize | string;
-	children: JSX.Element | JSX.Element[] | string;
-	style?: any;
-	className?: string;
-}
-
+export type ColProps = {
+	[key in Breakpoint]?: ColSize | string;
+};
 interface ColSize {
-	col?: string;
-	row?: string;
-	z?: number;
+	col?: string | number;
+	row?: string | number;
+	z?: number | string;
 	align?: string;
 	justify?: string;
 }
