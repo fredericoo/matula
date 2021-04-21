@@ -24,7 +24,7 @@ const Entry: React.FC<Entry> = ({
 }) => {
 	return (
 		<Link href={href} passHref>
-			<Wrapper>
+			<Wrapper active={false}>
 				<Date>{moment(start).format("HH[h]mm").replace(/0+$/, "")}</Date>
 				<div>
 					<Type>
