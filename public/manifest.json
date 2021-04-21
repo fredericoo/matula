@@ -3,7 +3,7 @@
 	"short_name": "Matula",
 	"icons": [
 		{
-			"src": "/favicon.png",
+			"src": "/img/matula-web-app.png",
 			"sizes": "512x512",
 			"type": "image/png",
 			"purpose": "any maskable"

@@ -19,9 +19,14 @@ module.exports = {
 
 	// Additional helper function for Next/Link component
 	hrefResolver: function (doc) {
-		if (doc.type === "home") {
-			return `/`;
+		switch (doc.type) {
+			case "home":
+				return `/`;
+			case "sessao":
+			case "oficina":
+				return `/programacao/${doc.uid}`;
+			default:
+				return `/${doc.uid}`;
 		}
-		return `/${doc.uid}`;
 	},
 };

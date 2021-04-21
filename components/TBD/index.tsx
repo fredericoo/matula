@@ -1,11 +1,12 @@
 import { StyledPage, Tape, Timer } from "./styles";
 import Grid from "components/Grid";
-import Head from "next/head";
+
 import { useEffect, useState } from "react";
 import { Duration } from "moment";
-import Image from "next/image";
+
 import moment from "moment";
 import SEO from "../SEO";
+import Picture from "../Picture";
 
 const TBD = ({
 	date,
@@ -36,13 +37,12 @@ const TBD = ({
 			<SEO />
 			<Grid sm={"10"}>
 				<Grid.Col
-					sm={{ row: "1", z: 1 }}
-					md="col-2 / col-10"
+					sm={{ col: "col-2 / col-10", row: "1", z: 1 }}
 					lg="col-4 / col-8"
 					style={{ position: "relative" }}
 				>
 					<Tape top="2%" right="-2%" rotate={-5}>
-						<Image
+						<Picture
 							src="/img/tape.png"
 							width={167}
 							height={512}
@@ -50,7 +50,7 @@ const TBD = ({
 						/>
 					</Tape>
 					<Tape left="4%" top="-2%" rotate={42}>
-						<Image
+						<Picture
 							src="/img/tape.png"
 							width={167}
 							height={512}
@@ -58,23 +58,23 @@ const TBD = ({
 						/>
 					</Tape>
 					<Tape left="45%" bottom="-2%" rotate={89}>
-						<Image
-							src="/img/tape.png"
+						<Picture
+							src="https://images.prismic.io/matula/66f7e057-3ef9-4227-ba79-e62a9066ea15_tape.png?auto=compress,format"
 							width={167}
 							height={512}
 							layout="responsive"
 						/>
 					</Tape>
-					<Image
-						src="/img/poster.png"
+					<Picture
+						src="https://images.prismic.io/matula/910ed246-dbde-42b3-a20b-bbd4ecbb4bd9_poster.png?auto=compress,format"
 						width="1200"
 						height="1683"
 						layout="responsive"
+						bg="#f8efe5"
 					/>
 				</Grid.Col>
 				<Grid.Col
-					sm={{ row: "1", z: 2, align: "end" }}
-					md="col-2 / col-10"
+					sm={{ col: "col-2 / col-10", row: "1", z: 2, align: "end" }}
 					lg="col-4 / col-8"
 				>
 					{timer && (

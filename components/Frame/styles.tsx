@@ -2,6 +2,7 @@ import styled from "styled-components";
 import constants from "theme/constants";
 
 export const StyledFrame = styled.div`
+	min-height: 100vh;
 	display: grid;
 	grid: "logo" min-content "content" 1fr "nav" min-content "tools" min-content "footer" min-content / 1fr;
 	@media (${constants.metrics.breakpoints.lg}) {
@@ -22,8 +23,7 @@ interface FrameSection {
 
 export const FrameSection = styled.section`
 	background: ${({ theme }) => theme.color.background};
-	border: solid ${({ theme }) => theme.color.border};
-	border-width: 0 0 1px 1px;
+	box-shadow: 0 0 0 1px ${({ theme }) => theme.color.border};
 	grid-area: ${(props: FrameSection) => props.gridArea};
 	position: ${(props: FrameSection) =>
 		props.sticky != undefined ? "sticky" : "static"};

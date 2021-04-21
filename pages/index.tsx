@@ -1,12 +1,11 @@
 import Grid from "components/Grid";
 import styled from "styled-components";
 import { Client } from "utils/prismic";
-import { RichText } from "prismic-reactjs";
 import Picture from "components/Picture";
 import BodyText from "components/BodyText";
-import { Theme } from "theme";
 import constants from "theme/constants";
 import SEO from "app/components/SEO";
+import Text from "app/components/Text";
 
 const HomeGrid = styled(Grid)`
 	height: 100%;
@@ -48,9 +47,11 @@ export default function Home({ doc }) {
 				lg={{ col: "grid-start / col-6", row: 1, align: "end" }}
 				xl={{ col: "grid-start / col-4", row: 1, align: "end" }}
 			>
-				<HeaderTitle>{RichText.asText(doc.data.title)}</HeaderTitle>
+				<HeaderTitle>
+					<Text asText content={doc.data.title} />
+				</HeaderTitle>
 				<HeaderBody>
-					<RichText render={doc.data.desc} />
+					<Text content={doc.data.desc} />
 				</HeaderBody>
 			</HeaderCol>
 			<Grid.Col
@@ -70,9 +71,11 @@ export default function Home({ doc }) {
 				lg={{ col: "col-5 / grid-end", row: 1, align: "start" }}
 				xl={{ col: "col-7 / grid-end", row: 1, align: "start" }}
 			>
-				<DatesTitle>{RichText.asText(doc.data.dates)}</DatesTitle>
+				<DatesTitle>
+					<Text asText content={doc.data.dates} />
+				</DatesTitle>
 				<BodyText>
-					<RichText render={doc.data.dates_about} />
+					<Text content={doc.data.dates_about} />
 				</BodyText>
 			</DatesCol>
 		</HomeGrid>

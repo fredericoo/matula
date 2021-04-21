@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 type SEO = {
 	title?: string;
 	description?: string;
+	image?: string;
 	keywords?: string | string[];
 	pageType?: string;
 };
@@ -44,10 +45,16 @@ const SEO: React.FC<SEO> = (props) => {
 
 			<meta property="og:type" content={props.pageType || "website"} />
 
+			<meta property="og:image" content={props.image || "/favicon.png"} />
+
 			<link rel="icon" href="/favicon.svg" />
 			<link rel="mask-icon" href="/favicon.svg" color="#000000" />
 			<meta name="msapplication-TileImage" content="/favicon.png" />
-			<link rel="apple-touch-icon" href="/favicon.png" sizes="512x512" />
+			<link
+				rel="apple-touch-icon"
+				href="/img/matula-web-app.png"
+				sizes="512x512"
+			/>
 			<link rel="icon" href="/favicon.png" sizes="512x512" />
 
 			{/* WEB APP */}

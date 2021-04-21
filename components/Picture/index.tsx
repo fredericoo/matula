@@ -38,10 +38,10 @@ const Picture = (props: ImageProps & Picture) => {
 			<StyledImage
 				hasLoaded={hasLoaded}
 				{...{
+					...props,
 					src: fixImageSrc(props.src),
 					quality: props.quality || 90,
 					onLoad: handleLoad,
-					...props,
 				}}
 			/>
 		</Wrapper>

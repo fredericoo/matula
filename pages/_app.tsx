@@ -12,7 +12,7 @@ import Tools from "components/Tools";
 import Logo from "components/Logo";
 
 function App({ Component, pageProps }: AppProps): JSX.Element {
-	const releaseDate = moment().add(10, "seconds"); // moment("2021-05-13", "YYYY-MM-DD");
+	const releaseDate = moment(); // moment("2021-05-13", "YYYY-MM-DD");
 	const alreadyReleased =
 		moment.duration(releaseDate.diff(moment())).asSeconds() <= 0;
 	const [released, setReleased] = useState(alreadyReleased);
@@ -24,11 +24,11 @@ function App({ Component, pageProps }: AppProps): JSX.Element {
 					<Frame.Section gridArea="logo" sticky={0}>
 						<Logo />
 					</Frame.Section>
-					<Frame.Section gridArea="nav">
-						<Navigation />
-					</Frame.Section>
 					<Frame.Section gridArea="content">
 						<Component {...pageProps} />
+					</Frame.Section>
+					<Frame.Section gridArea="nav">
+						<Navigation />
 					</Frame.Section>
 					<Frame.Section gridArea="tools">
 						<Tools />
