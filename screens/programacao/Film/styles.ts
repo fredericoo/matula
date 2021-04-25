@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import constants from "app/theme/constants";
+import Grid from "app/components/Grid";
 
 export const Header = styled.header`
 	width: calc(100% + 4rem);
@@ -52,7 +53,22 @@ export const Info = styled.div`
 	}
 `;
 
+export const ContentGrid = styled(Grid)`
+	height: auto;
+	padding-top: 2rem;
+	padding-bottom: 2rem;
+`;
+
 export const Actions = styled.div`
 	padding: 2rem;
 	color: ${({ theme }) => theme.color.background};
+`;
+
+export const Label = styled.p`
+	color: ${({ theme }) => theme.color.primary};
+	font-family: ${constants.typography.font.headings};
+	text-transform: uppercase;
+	font-size: ${constants.typography.size.vsmall};
+	font-weight: ${constants.typography.weight.regular};
+	margin-bottom: 0.3em;
 `;
