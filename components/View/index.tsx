@@ -17,6 +17,7 @@ const wrapBreakpoint = (
 const breakpoints: Breakpoint[] = ["sm", "md", "lg", "xl"];
 
 const View = styled.div<ViewProps>`
+	display: flex;
 	${(props) =>
 		breakpoints.map((key) => {
 			const config = props[key];
@@ -31,6 +32,7 @@ const View = styled.div<ViewProps>`
 			}
 			return wrapBreakpoint(
 				css`
+					display: ${config.inline ? "inline-flex" : ""};
 					${config.padding ? `padding: ${config.padding};` : ""}
 					${config.margin
 						? `margin: ${config.margin};`
@@ -50,11 +52,17 @@ const View = styled.div<ViewProps>`
                     ${config.sticky
 						? `position: sticky; top: ${config.sticky};`
 						: ""}
+					${config.gap
+						? css`
+							&>*:not(:last-child) {
+								margin-${config.direction === "column" ? "bottom " : "right"}: ${config.gap};
+							}
+						  `
+						: ""}
 				`,
 				key
 			);
 		})}
-	display: flex;
 `;
 
 export default View;
