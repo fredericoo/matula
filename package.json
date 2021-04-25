@@ -9,6 +9,7 @@
 	},
 	"dependencies": {
 		"@types/styled-components": "^5.1.9",
+		"animated-scroll-to": "^2.2.0",
 		"breakpoint-sass": "^2.7.1",
 		"framer-motion": "^4.1.2",
 		"moment": "^2.29.1",

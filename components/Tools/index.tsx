@@ -1,25 +1,35 @@
 import styled from "styled-components";
-import BodyText from "components/BodyText";
+import Picture from "../Picture";
+import { useConfig } from "app/utils/hooks/useConfig";
 
 const Tools = () => {
+	const { data: config } = useConfig();
+	const sponsorImg = config?.data.sponsor_img;
+
 	return (
 		<ToolsWrapper>
-			<BodyText>
-				<p>
-					A arte em Minas é muito forte, onde nossos saberes, nossa cultura,
-					permeia o imaginário aparecendo em diversas formas. Como não lembrar
-					dos contos de Guimarães Rosa? Em Primeiras Estórias (1962), o conto A
-					Terceira Margem do Rio narra sobre o garoto que vê o pai se despedir
-					da família para nunca mais voltar: “Nem falou outras palavras, não
-					pegou matula e trouxa”.
-				</p>
-			</BodyText>
+			<SponsorsWrapper>
+				{sponsorImg && (
+					<Picture
+						src={sponsorImg.url}
+						width={sponsorImg.dimensions.width}
+						height={sponsorImg.dimensions.height}
+						alt={sponsorImg.alt}
+						layout="responsive"
+					/>
+				)}
+			</SponsorsWrapper>
 		</ToolsWrapper>
 	);
 };
 
 const ToolsWrapper = styled.aside`
 	padding: 1rem;
+`;
+
+const SponsorsWrapper = styled.div`
+	margin-right: auto;
+	max-width: 600px;
 `;
 
 export default Tools;

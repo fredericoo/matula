@@ -2,18 +2,19 @@ import styled from "styled-components";
 import constants from "theme/constants";
 
 export const StyledFrame = styled.div`
-	min-height: 100vh;
+	min-height: 100%;
 	display: grid;
 	grid: "logo" min-content "content" 1fr "nav" min-content "tools" min-content "footer" min-content / 1fr;
+	background: ${({ theme }) => theme.color.background};
 	@media (${constants.metrics.breakpoints.lg}) {
+		padding: 1rem;
 		grid:
 			"logo content content" min-content
 			"nav content content" minmax(100px, 1fr)
 			"tools tools footer" min-content / min-content 6fr 4fr;
-		height: 100vh;
+		height: calc(100vh);
 	}
-
-	width: 100vw;
+	width: 100%;
 `;
 
 interface FrameSection {

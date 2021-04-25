@@ -4,8 +4,10 @@ import moment, { Moment } from "moment";
 import Session from "./Session";
 import { useState, useMemo } from "react";
 import Filters from "./Filters";
-import { NavCol, Sessions } from "./styles";
+import { NavCol, Sessions, StyledGrid, ContentCol } from "./styles";
 import { Document } from "prismic-javascript/types/documents";
+import Workshop from "./Workshop";
+import Film from "./Film";
 const dateFormat = "YYYY-MM-DD";
 
 type Programacao = {
@@ -20,6 +22,14 @@ type DaySlice = {
 type Primary = {
 	session_day: string;
 	session_title: string;
+};
+
+const contentFromType = (type: string) => {
+	const map = {
+		oficina: Workshop,
+		sessao: Film,
+	};
+	return map[type] || null;
 };
 
 const Programacao: React.FC<Screen & Programacao> = ({ data, current }) => {
@@ -39,6 +49,8 @@ const Programacao: React.FC<Screen & Programacao> = ({ data, current }) => {
 		[data]
 	);
 
+	const Current = current ? contentFromType(current.type) : null;
+
 	const categories: string[] = useMemo(
 		() =>
 			Array.from(
@@ -54,8 +66,8 @@ const Programacao: React.FC<Screen & Programacao> = ({ data, current }) => {
 	);
 
 	return (
-		<Grid sm="10">
-			<NavCol as="nav" md="screen-start / col-4">
+		<StyledGrid sm={{ cols: 10, gap: "0" }}>
+			<NavCol as="nav" md="grid-start / col-4">
 				<Filters filter={filter} items={categories} onFilter={setFilter} />
 				<Sessions>
 					{dates.map((date) => (
@@ -71,8 +83,10 @@ const Programacao: React.FC<Screen & Programacao> = ({ data, current }) => {
 					))}
 				</Sessions>
 			</NavCol>
-			<Grid.Col md="col-4 / screen-end">{current?.uid}</Grid.Col>
-		</Grid>
+			<ContentCol md="col-4 / grid-end">
+				{Current && <Current data={current.data} />}
+			</ContentCol>
+		</StyledGrid>
 	);
 };
 

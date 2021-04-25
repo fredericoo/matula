@@ -16,17 +16,15 @@ const wrapInBreakpoint = (
 	`;
 };
 
-const colsToGrid = (cols: number) => {
+const colsToGrid = (cols: number, main: boolean) => {
 	return css`
 		grid-template-columns:
-			[screen-start]
-			var(--sidebearing)
+			${main ? "[screen-start] var(--sidebearing)" : ""}
 			[grid-start col-1] 1fr ${new Array(cols - 1)
 				.fill("")
 				.map((_, index) => `[col-${index + 2}] 1fr`)
 				.join(" ")} [grid-end]
-			var(--sidebearing)
-			[screen-end];
+			${main ? "var(--sidebearing) [screen-end]" : ""};
 	`;
 };
 
@@ -82,12 +80,12 @@ export const StyledGrid = styled.section<GridProps>`
 			const config = props[key];
 			if (!config) return "";
 			if (typeof config === "string") {
-				return colsToGrid(+config);
+				return colsToGrid(+config, false);
 			}
 			return wrapInBreakpoint(
 				css`
 					--gap: ${config?.gap};
-					${colsToGrid(+config.cols)}
+					${colsToGrid(+config.cols, config.main || false)}
 				`,
 				key
 			);

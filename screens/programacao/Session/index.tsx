@@ -6,6 +6,7 @@ import Entry from "../Entry";
 import { RichText } from "prismic-reactjs";
 import { hrefResolver } from "app/prismic-config";
 import { Document } from "prismic-javascript/types/documents";
+import { useRouter } from "next/router";
 
 type Session = {
 	day: Moment;
@@ -14,8 +15,10 @@ type Session = {
 	current: Document;
 };
 
-const Session: React.FC<Session> = ({ day, title, items, current }) => {
+const Session: React.FC<Session> = ({ day, title, items }) => {
+	const { asPath } = useRouter();
 	if (!items.length) return null;
+
 	return (
 		<li>
 			<Header>
@@ -32,7 +35,7 @@ const Session: React.FC<Session> = ({ day, title, items, current }) => {
 						.filter(({ row }) => row.data)
 						.map(({ row }) => (
 							<Entry
-								active={current && row.uid === current.uid}
+								active={asPath === hrefResolver(row)}
 								href={hrefResolver(row)}
 								key={RichText.asText(row.data.title)}
 								type={row.data.type}
@@ -52,6 +55,8 @@ const Session: React.FC<Session> = ({ day, title, items, current }) => {
 };
 
 const Header = styled.h3`
+	position: sticky;
+	top: 0;
 	overflow: hidden;
 	width: 100%;
 	text-align: center;
@@ -61,6 +66,9 @@ const Header = styled.h3`
 	font-family: ${constants.typography.font.headings};
 	font-weight: ${constants.typography.weight.regular};
 	text-transform: uppercase;
+	border-left: 1px solid ${({ theme }) => theme.color.border};
+	border-bottom: 3px double ${({ theme }) => theme.color.border};
+	background: ${({ theme }) => theme.color.background};
 `;
 
 export default Session;

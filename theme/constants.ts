@@ -14,12 +14,16 @@ const constants = {
 			headings: `"lexend-tera", -apple-system, BlinkMacSystemFont, "Segoe UI",
 			Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
 			"Segoe UI Symbol"`,
+			decoration: `"Medula One", -apple-system, BlinkMacSystemFont,
+			"Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji",
+			"Segoe UI Emoji", "Segoe UI Symbol"`,
 		},
 		size: {
 			vsmall: ".6rem",
 			small: ".85rem",
 			medium: "1.125rem",
 			large: "1.4rem",
+			vlarge: "2rem",
 			display: "3.6rem",
 		},
 		weight: {

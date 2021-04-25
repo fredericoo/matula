@@ -23,8 +23,9 @@ module.exports = {
 			case "home":
 				return `/`;
 			case "sessao":
+				return `/filme/${doc.uid}`;
 			case "oficina":
-				return `/programacao/${doc.uid}`;
+				return `/oficina/${doc.uid}`;
 			default:
 				return `/${doc.uid}`;
 		}

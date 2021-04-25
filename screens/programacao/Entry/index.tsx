@@ -1,7 +1,7 @@
 import { RichTextBlock } from "prismic-reactjs";
 import Text from "app/components/Text";
 import moment from "moment";
-import { Wrapper, Type, Title, Subtitle, Date } from "./styles";
+import { Wrapper, Type, Title, Subtitle, Date, Details } from "./styles";
 import Link from "next/link";
 
 type Entry = {
@@ -21,12 +21,13 @@ const Entry: React.FC<Entry> = ({
 	subtitle,
 	start,
 	end,
+	active,
 }) => {
 	return (
 		<Link href={href} passHref>
-			<Wrapper active={false}>
+			<Wrapper active={active}>
 				<Date>{moment(start).format("HH[h]mm").replace(/0+$/, "")}</Date>
-				<div>
+				<Details>
 					<Type>
 						<Text content={type} />
 					</Type>
@@ -36,7 +37,7 @@ const Entry: React.FC<Entry> = ({
 					<Subtitle>
 						<Text content={subtitle} />
 					</Subtitle>
-				</div>
+				</Details>
 			</Wrapper>
 		</Link>
 	);

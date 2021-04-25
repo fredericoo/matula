@@ -10,6 +10,7 @@ import Navigation from "components/Navigation";
 import Footer from "components/Footer";
 import Tools from "components/Tools";
 import Logo from "components/Logo";
+import { ConfigProvider } from "app/utils/hooks/useConfig";
 
 function App({ Component, pageProps }: AppProps): JSX.Element {
 	const releaseDate = moment(); // moment("2021-05-13", "YYYY-MM-DD");
@@ -20,23 +21,25 @@ function App({ Component, pageProps }: AppProps): JSX.Element {
 	return (
 		<ThemeProvider theme={theme}>
 			{released ? (
-				<Frame>
-					<Frame.Section gridArea="logo" sticky={0}>
-						<Logo />
-					</Frame.Section>
-					<Frame.Section gridArea="content">
-						<Component {...pageProps} />
-					</Frame.Section>
-					<Frame.Section gridArea="nav">
-						<Navigation />
-					</Frame.Section>
-					<Frame.Section gridArea="tools">
-						<Tools />
-					</Frame.Section>
-					<Frame.Section gridArea="footer">
-						<Footer />
-					</Frame.Section>
-				</Frame>
+				<ConfigProvider>
+					<Frame>
+						<Frame.Section gridArea="logo" sticky={0}>
+							<Logo />
+						</Frame.Section>
+						<Frame.Section gridArea="content">
+							<Component {...pageProps} />
+						</Frame.Section>
+						<Frame.Section gridArea="nav">
+							<Navigation />
+						</Frame.Section>
+						<Frame.Section gridArea="tools">
+							<Tools />
+						</Frame.Section>
+						<Frame.Section gridArea="footer">
+							<Footer />
+						</Frame.Section>
+					</Frame>
+				</ConfigProvider>
 			) : (
 				<TBD
 					date={releaseDate}

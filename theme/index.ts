@@ -16,7 +16,8 @@ const theme: Theme = {
 		background: "#f8efe5",
 		primary: "#4c3688",
 		secondary: "#e66617",
-		border: "#e66617",
+		tertiary: "#bbcc98",
+		border: "#4c3688",
 	},
 };
 
