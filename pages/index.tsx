@@ -59,12 +59,14 @@ export default function Home({ doc }) {
 				lg={{ col: "col-4 / screen-end", row: 1, align: "end" }}
 				xl={{ col: "col-2 / col-8", row: 1, align: "end" }}
 			>
-				<Picture
-					src={doc.data.image.url}
-					width={doc.data.image.dimensions.width}
-					height={doc.data.image.dimensions.height}
-					layout="responsive"
-				/>
+				{doc.data.image?.url && (
+					<Picture
+						src={doc.data.image.url}
+						width={doc.data.image.dimensions.width}
+						height={doc.data.image.dimensions.height}
+						layout="responsive"
+					/>
+				)}
 			</Grid.Col>
 			<DatesCol
 				sm="grid-start / grid-end"
