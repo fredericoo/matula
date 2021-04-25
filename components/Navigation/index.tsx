@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { StyledLi, StyledUl } from "./styles";
+import { StyledLi, StyledUl, BackgroundPicture } from "./styles";
 import { useRouter } from "next/router";
 import { hrefResolver } from "prismic-config";
 import { useConfig } from "app/utils/hooks/useConfig";
@@ -39,6 +39,13 @@ const Navigation: React.FC = () => {
 						</StyledLi>
 					);
 				})}
+			{config?.data?.deco?.url && (
+				<BackgroundPicture
+					width={config.data.deco.dimensions.width}
+					height={config.data.deco.dimensions.height}
+					src={config.data.deco.url}
+				/>
+			)}
 		</StyledUl>
 	);
 };

@@ -6,13 +6,19 @@ import BodyText from "components/BodyText";
 import constants from "theme/constants";
 import SEO from "app/components/SEO";
 import Text from "app/components/Text";
+import View from "app/components/View";
 
 const HomeGrid = styled(Grid)`
 	height: 100%;
+	padding: 1rem;
 `;
 
 const HeaderCol = styled(Grid.Col)`
-	margin-block-end: 2rem;
+	height: 100%;
+`;
+
+const HeaderView = styled(View)`
+	height: 100%;
 `;
 
 const HeaderTitle = styled.h1`
@@ -25,16 +31,31 @@ const HeaderBody = styled(BodyText)`
 	color: ${({ theme }) => theme.color.secondary};
 `;
 
-const DatesCol = styled(Grid.Col)`
-	margin-top: 2rem;
-	color: ${({ theme }) => theme.color.primary};
-`;
-
 const DatesTitle = styled.h2`
-	font-size: ${constants.typography.size.display};
+	font-size: ${constants.typography.size.large};
 	font-family: ${constants.typography.font.headings};
+	font-weight: ${constants.typography.weight.regular};
 	text-transform: uppercase;
 	margin-bottom: 1rem;
+	color: ${({ theme }) => theme.color.primary};
+	strong {
+		font-size: ${constants.typography.size.display};
+		color: ${({ theme }) => theme.color.secondary};
+		font-family: ${constants.typography.font.decoration};
+		display: inline-block;
+		&:nth-child(1) {
+			transform: rotate(-6deg);
+		}
+		&:nth-child(2) {
+			transform: rotate(3deg);
+		}
+		&:nth-child(3) {
+			transform: rotate(-5deg);
+		}
+		&:nth-child(4) {
+			transform: rotate(8deg);
+		}
+	}
 `;
 
 export default function Home({ doc }) {
@@ -47,39 +68,28 @@ export default function Home({ doc }) {
 				lg={{ col: "grid-start / col-6", row: 1, align: "end" }}
 				xl={{ col: "grid-start / col-4", row: 1, align: "end" }}
 			>
-				<HeaderTitle>
-					<Text asText content={doc.data.title} />
-				</HeaderTitle>
-				<HeaderBody>
-					<Text content={doc.data.desc} />
-				</HeaderBody>
+				<HeaderView
+					sm={{ direction: "column", justify: "space-between", gap: "2rem" }}
+				>
+					<aside>
+						<DatesTitle>
+							<Text content={doc.data.dates} />
+						</DatesTitle>
+						<BodyText>
+							<Text content={doc.data.dates_about} />
+						</BodyText>
+					</aside>
+
+					<header>
+						<HeaderTitle>
+							<Text asText content={doc.data.title} />
+						</HeaderTitle>
+						<HeaderBody>
+							<Text content={doc.data.desc} />
+						</HeaderBody>
+					</header>
+				</HeaderView>
 			</HeaderCol>
-			<Grid.Col
-				sm="grid-start / grid-end"
-				lg={{ col: "col-4 / screen-end", row: 1, align: "end" }}
-				xl={{ col: "col-2 / col-8", row: 1, align: "end" }}
-			>
-				{doc.data.image?.url && (
-					<Picture
-						src={doc.data.image.url}
-						width={doc.data.image.dimensions.width}
-						height={doc.data.image.dimensions.height}
-						layout="responsive"
-					/>
-				)}
-			</Grid.Col>
-			<DatesCol
-				sm="grid-start / grid-end"
-				lg={{ col: "col-5 / grid-end", row: 1, align: "start" }}
-				xl={{ col: "col-7 / grid-end", row: 1, align: "start" }}
-			>
-				<DatesTitle>
-					<Text asText content={doc.data.dates} />
-				</DatesTitle>
-				<BodyText>
-					<Text content={doc.data.dates_about} />
-				</BodyText>
-			</DatesCol>
 		</HomeGrid>
 	);
 }

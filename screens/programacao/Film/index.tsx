@@ -44,6 +44,9 @@ const Film: React.FC<Film> = ({ data }) => {
 		const interval = setInterval(() => {
 			setTillStart(moment(data.start).diff(moment()));
 			if (videoRef.current) {
+				if (videoRef.current.currentTime === videoRef.current.duration) {
+					setPlaying(false);
+				}
 				setVideoProgress(
 					Math.round(
 						(videoRef.current.currentTime / videoRef.current.duration) * 100

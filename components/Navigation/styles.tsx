@@ -1,8 +1,9 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { Theme } from "theme/index";
 import constants from "theme/constants";
 import { motion } from "framer-motion";
 import { hatchBackground } from "app/theme/effects";
+import Picture from "app/components/Picture";
 
 export const StyledUl = styled(motion.ul)`
 	display: flex;
@@ -30,6 +31,7 @@ interface ListItem {
 }
 
 export const StyledLi = styled(motion.li)<ListItem>`
+	z-index: 2;
 	font-family: ${constants.typography.font.headings};
 	font-weight: ${constants.typography.weight.regular};
 	font-size: ${constants.typography.size.vsmall};
@@ -58,4 +60,11 @@ export const StyledLi = styled(motion.li)<ListItem>`
 		box-shadow: 0 0 0 1px ${({ theme }) => theme.color.border};
 		font-size: ${constants.typography.size.small};
 	}
+`;
+
+export const BackgroundPicture = styled(Picture)`
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	z-index: 1;
 `;
