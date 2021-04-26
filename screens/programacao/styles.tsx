@@ -1,17 +1,28 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import Grid from "app/components/Grid";
 import { hideScrollbars } from "app/theme/effects";
+import constants from "app/theme/constants";
 
 export const StyledGrid = styled(Grid)`
 	overflow: hidden;
 `;
 
-export const NavCol = styled(Grid.Col)`
+type NavCol = { isSingle?: boolean };
+export const NavCol = styled(Grid.Col)<NavCol>`
 	display: flex;
 	height: 100%;
 	flex-direction: column;
 	border-right: 1px solid ${({ theme }) => theme.color.border};
 	overflow: hidden;
+	${({ isSingle }) =>
+		isSingle
+			? css`
+					display: none;
+					@media (${constants.metrics.breakpoints.lg}) {
+						display: block;
+					}
+			  `
+			: ""}
 `;
 
 export const ContentCol = styled(Grid.Col)`

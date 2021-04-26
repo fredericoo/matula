@@ -67,7 +67,7 @@ const Programacao: React.FC<Screen & Programacao> = ({ data, current }) => {
 
 	return (
 		<StyledGrid sm={{ cols: 10, gap: "0" }}>
-			<NavCol as="nav" md="grid-start / col-4">
+			<NavCol as="nav" md="grid-start / col-4" isSingle={!!Current}>
 				<Filters filter={filter} items={categories} onFilter={setFilter} />
 				<Sessions>
 					{dates.map((date) => (

@@ -23,13 +23,13 @@ function App({ Component, pageProps }: AppProps): JSX.Element {
 			{released ? (
 				<ConfigProvider>
 					<Frame>
-						<Frame.Section gridArea="logo" sticky={0}>
+						<Frame.Section gridArea="logo" sticky={0} z={100}>
 							<Logo />
 						</Frame.Section>
 						<Frame.Section gridArea="content">
 							<Component {...pageProps} />
 						</Frame.Section>
-						<Frame.Section gridArea="nav">
+						<Frame.Section gridArea="nav" z={100}>
 							<Navigation />
 						</Frame.Section>
 						<Frame.Section gridArea="tools">

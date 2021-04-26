@@ -31,7 +31,7 @@ const Navigation: React.FC = () => {
 							key={href}
 							initial={{ opacity: 0 }}
 							animate={{ opacity: 1 }}
-							active={asPath.includes(href)}
+							active={asPath === href}
 						>
 							<Link href={href}>
 								<a>{item.label}</a>

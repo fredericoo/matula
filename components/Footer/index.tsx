@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import BodyText from "components/BodyText";
+import constants from "app/theme/constants";
 
 const Footer = () => {
 	return (
@@ -13,7 +14,10 @@ const Footer = () => {
 };
 
 const FooterWrapper = styled.footer`
-	padding: 1rem;
+	padding: 1rem 1rem 6rem;
+	@media (${constants.metrics.breakpoints.lg}) {
+		padding: 1rem;
+	}
 `;
 
 export default Footer;

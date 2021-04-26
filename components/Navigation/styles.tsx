@@ -16,6 +16,7 @@ export const StyledUl = styled(motion.ul)`
 	${hideScrollbars}
 	background: ${({ theme }) => theme.color.background};
 	border-top: 1px solid ${({ theme }) => theme.color.border};
+	z-index: 100;
 	@media (${constants.metrics.breakpoints.md}) {
 		background: transparent;
 		border-top: 0;
@@ -31,13 +32,16 @@ interface ListItem {
 }
 
 export const StyledLi = styled(motion.li)<ListItem>`
+	margin: 0;
+	flex: 1 0 0px;
+	text-align: center;
 	z-index: 2;
 	font-family: ${constants.typography.font.headings};
 	font-weight: ${constants.typography.weight.regular};
 	font-size: ${constants.typography.size.vsmall};
 	a {
 		display: block;
-		padding: 1rem 1rem env(safe-area-inset-bottom, 1rem) 1rem;
+		padding: 1rem 1rem calc(env(safe-area-inset-bottom, 1rem) + 1rem) 1rem;
 	}
 	text-transform: uppercase;
 	${({ active, theme }) =>
@@ -49,6 +53,8 @@ export const StyledLi = styled(motion.li)<ListItem>`
 	color: ${({ theme }) => theme.color.primary};
 
 	@media (${constants.metrics.breakpoints.md}) {
+		flex: inherit;
+		text-align: left;
 		a {
 			padding: 1rem;
 			&:hover {
@@ -63,6 +69,10 @@ export const StyledLi = styled(motion.li)<ListItem>`
 `;
 
 export const BackgroundPicture = styled(Picture)`
+	display: none;
+	@media (${constants.metrics.breakpoints.md}) {
+		display: block;
+	}
 	position: absolute;
 	bottom: 0;
 	width: 100%;

@@ -21,27 +21,30 @@ export const StyledFrame = styled.div`
 			"logo content content" min-content
 			"nav content content" minmax(100px, 1fr)
 			"tools tools footer" min-content / min-content 6fr 4fr;
+		border: solid ${({ theme }) => theme.color.border};
+		border-width: 0 0 1px 1px;
 	}
-	border: solid ${({ theme }) => theme.color.border};
-	border-width: 0 0 1px 1px;
 	width: 100%;
 `;
 
 interface FrameSection {
 	gridArea: string;
 	sticky?: number;
+	z?: number;
 }
 
 export const FrameSection = styled.section`
 	background: ${({ theme }) => theme.color.background};
-	border: solid ${({ theme }) => theme.color.border};
-	border-width: 1px 1px 0 0;
+
 	grid-area: ${(props: FrameSection) => props.gridArea};
 	position: ${(props: FrameSection) =>
 		props.sticky != undefined ? "sticky" : "static"};
 	top: ${(props: FrameSection) =>
 		props.sticky != undefined ? `${props.sticky}px` : "auto"};
+	z-index: ${({ z }: FrameSection) => z};
 	@media (${constants.metrics.breakpoints.lg}) {
+		border: solid ${({ theme }) => theme.color.border};
+		border-width: 1px 1px 0 0;
 		overflow-y: scroll;
 		${hideScrollbars}
 	}

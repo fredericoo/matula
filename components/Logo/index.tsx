@@ -20,6 +20,7 @@ export const Anchor = styled.a`
 		background: transparent;
 	}
 	display: block;
+	z-index: 100;
 `;
 
 const Logo = () => (
