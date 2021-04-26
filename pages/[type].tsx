@@ -2,6 +2,7 @@ import { Client } from "app/utils/prismic";
 import Programacao from "app/screens/programacao";
 import SEO from "app/components/SEO";
 import Sobre from "app/screens/sobre";
+import Contato from "app/screens/contato";
 
 export type Screen = { data: any };
 
@@ -9,6 +10,7 @@ type Screens = { [uid: string]: React.FC<Screen> };
 const screens: Screens = {
 	programacao: Programacao,
 	sobre: Sobre,
+	contato: Contato,
 };
 
 export const Page: React.FC<{ doc: any }> = ({ doc }) => {
