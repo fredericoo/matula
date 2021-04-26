@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { Theme } from "theme/index";
 import constants from "theme/constants";
 import { motion } from "framer-motion";
-import { hatchBackground } from "app/theme/effects";
+import { hatchBackground, hideScrollbars } from "app/theme/effects";
 import Picture from "app/components/Picture";
 
 export const StyledUl = styled(motion.ul)`
@@ -13,6 +13,7 @@ export const StyledUl = styled(motion.ul)`
 	min-width: min(250px, 100vw);
 	width: 100%;
 	overflow-y: scroll;
+	${hideScrollbars}
 	background: ${({ theme }) => theme.color.background};
 	border-top: 1px solid ${({ theme }) => theme.color.border};
 	@media (${constants.metrics.breakpoints.md}) {

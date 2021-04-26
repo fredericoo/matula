@@ -5,3 +5,11 @@ export const hatchBackground = css`
 		${({ theme }) => theme.color.background};
 	background-size: 4px;
 `;
+
+export const hideScrollbars = css`
+	-ms-overflow-style: none;
+	scrollbar-width: none;
+	&::-webkit-scrollbar {
+		display: none;
+	}
+`;

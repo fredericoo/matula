@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Grid from "app/components/Grid";
+import { hideScrollbars } from "app/theme/effects";
 
 export const StyledGrid = styled(Grid)`
 	overflow: hidden;
@@ -18,9 +19,11 @@ export const ContentCol = styled(Grid.Col)`
 	padding-right: 2rem;
 	height: 100%;
 	overflow-y: scroll;
+	${hideScrollbars}
 `;
 
 export const Sessions = styled.ul`
 	overflow-y: scroll;
 	height: 100%;
+	${hideScrollbars}
 `;
