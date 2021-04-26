@@ -31,6 +31,11 @@ const Sobre: React.FC<Screen> = ({ data }) => {
 							width={data.deco1.dimensions.width}
 							height={data.deco1.dimensions.height}
 							alt={data.deco1.dimensions.alt}
+							bg="#bbcc98"
+							layout="responsive"
+							sizes="(max-width: 768px) 150px,
+								(max-width: 1920px) 300px,
+								600px"
 						/>
 					)}
 				</Grid.Col>
@@ -48,6 +53,11 @@ const Sobre: React.FC<Screen> = ({ data }) => {
 							width={data.deco2.dimensions.width}
 							height={data.deco2.dimensions.height}
 							alt={data.deco2.dimensions.alt}
+							bg="#bbcc98"
+							layout="responsive"
+							sizes="(max-width: 768px) 150px,
+								(max-width: 1920px) 300px,
+								600px"
 						/>
 					)}
 				</Grid.Col>
@@ -65,6 +75,7 @@ const Sobre: React.FC<Screen> = ({ data }) => {
 							width={data.icon1.dimensions.width}
 							height={data.icon1.dimensions.height}
 							alt={data.icon1.dimensions.alt}
+							layout="responsive"
 						/>
 					)}
 				</Grid.Col>
@@ -72,24 +83,28 @@ const Sobre: React.FC<Screen> = ({ data }) => {
 			<StyledGrid sm={{ cols: 10, gap: "2rem" }}>
 				<Grid.Col lg={{ col: "grid-start / col-10", row: 1 }}>
 					{data.deco3?.url && (
-						<View lg={{ padding: "0 0 2rem 0" }}>
-							<Picture
-								src={data.deco3.url}
-								width={data.deco3.dimensions.width}
-								height={data.deco3.dimensions.height}
-								alt={data.deco3.dimensions.alt}
-							/>
-						</View>
+						<Picture
+							src={data.deco3.url}
+							width={data.deco3.dimensions.width}
+							height={data.deco3.dimensions.height}
+							alt={data.deco3.dimensions.alt}
+							bg="#bbcc98"
+							layout="responsive"
+							sizes="(max-width: 768px) 300px,
+								(max-width: 1920px) 600px,
+								1200px"
+						/>
 					)}
 				</Grid.Col>
 				<Grid.Col lg={{ col: "col-9 / grid-end", row: 1, align: "end" }}>
 					{data.icon2?.url && (
-						<View lg={{ padding: "0 2rem" }}>
+						<View lg={{ padding: "0 2rem", margin: "0 0 -2rem 0" }}>
 							<Picture
 								src={data.icon2.url}
 								width={data.icon2.dimensions.width}
 								height={data.icon2.dimensions.height}
 								alt={data.icon2.dimensions.alt}
+								layout="responsive"
 							/>
 						</View>
 					)}
@@ -110,6 +125,7 @@ const Sobre: React.FC<Screen> = ({ data }) => {
 							width={data.icon3.dimensions.width}
 							height={data.icon3.dimensions.height}
 							alt={data.icon3.dimensions.alt}
+							layout="responsive"
 						/>
 					)}
 				</Grid.Col>
@@ -121,12 +137,17 @@ const Sobre: React.FC<Screen> = ({ data }) => {
 					)}
 				</Grid.Col>
 				<Grid.Col lg="col-8 / grid-end">
-					{data.deco1?.url && (
+					{data.deco4?.url && (
 						<Picture
 							src={data.deco4.url}
 							width={data.deco4.dimensions.width}
 							height={data.deco4.dimensions.height}
 							alt={data.deco4.dimensions.alt}
+							bg="#bbcc98"
+							layout="responsive"
+							sizes="(max-width: 768px) 150px,
+								(max-width: 1920px) 300px,
+								600px"
 						/>
 					)}
 				</Grid.Col>
