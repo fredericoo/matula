@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import constants from "theme/constants";
+import { hideScrollbars } from "app/theme/effects";
 
 export const PageWrapper = styled.main`
 	background: ${({ theme }) => theme.color.background};
@@ -42,5 +43,6 @@ export const FrameSection = styled.section`
 		props.sticky != undefined ? `${props.sticky}px` : "auto"};
 	@media (${constants.metrics.breakpoints.lg}) {
 		overflow-y: scroll;
+		${hideScrollbars}
 	}
 `;
