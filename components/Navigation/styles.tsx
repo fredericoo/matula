@@ -16,7 +16,6 @@ export const StyledUl = styled(motion.ul)`
 	background: ${({ theme }) => theme.color.background};
 	border-top: 1px solid ${({ theme }) => theme.color.border};
 	@media (${constants.metrics.breakpoints.md}) {
-		padding-top: 1px;
 		background: transparent;
 		border-top: 0;
 		height: 100%;

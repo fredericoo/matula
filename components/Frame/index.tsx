@@ -1,7 +1,9 @@
-import { StyledFrame, FrameSection } from "./styles";
+import { StyledFrame, FrameSection, PageWrapper } from "./styles";
 
 const Frame: React.FC & { Section: typeof FrameSection } = (props) => (
-	<StyledFrame {...props} />
+	<PageWrapper>
+		<StyledFrame {...props} />
+	</PageWrapper>
 );
 
 Frame.Section = FrameSection;

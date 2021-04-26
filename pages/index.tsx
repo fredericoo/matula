@@ -1,7 +1,6 @@
 import Grid from "components/Grid";
 import styled from "styled-components";
 import { Client } from "utils/prismic";
-import Picture from "components/Picture";
 import BodyText from "components/BodyText";
 import constants from "theme/constants";
 import SEO from "app/components/SEO";

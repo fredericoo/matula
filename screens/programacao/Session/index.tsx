@@ -66,7 +66,6 @@ const Header = styled.h3`
 	font-family: ${constants.typography.font.headings};
 	font-weight: ${constants.typography.weight.regular};
 	text-transform: uppercase;
-	border-left: 1px solid ${({ theme }) => theme.color.border};
 	border-bottom: 3px double ${({ theme }) => theme.color.border};
 	background: ${({ theme }) => theme.color.background};
 `;
