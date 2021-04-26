@@ -71,7 +71,6 @@ StyledCol.defaultProps = { sm: { col: "grid-start / grid-end" } };
 
 export const StyledGrid = styled.section<GridProps>`
 	width: 100%;
-	height: 100%;
 	display: grid;
 	--gap: 2rem;
 	--sidebearing: calc((100vw - ${constants.metrics.containerWidth}) / 2);
