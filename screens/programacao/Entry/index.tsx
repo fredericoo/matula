@@ -9,7 +9,7 @@ type Entry = {
 	href: string;
 	type: string;
 	title: string | RichTextBlock;
-	subtitle: string;
+	subtitle: JSX.Element | string;
 	start: string;
 	end: string;
 };
@@ -34,9 +34,7 @@ const Entry: React.FC<Entry> = ({
 					<Title>
 						<Text content={title} asText />
 					</Title>
-					<Subtitle>
-						<Text content={subtitle} />
-					</Subtitle>
+					<Subtitle>{subtitle}</Subtitle>
 				</Details>
 			</Wrapper>
 		</Link>
