@@ -9,6 +9,7 @@ export const Header = styled.header`
 	height: 0px;
 	position: relative;
 	padding-bottom: calc((100% + 4rem) * 0.5625);
+	min-height: calc((100% + 4rem) * 0.5625);
 	background: black;
 	color: ${({ theme }) => theme.color.background};
 	text-align: center;
@@ -94,6 +95,7 @@ export const Video = styled.video<{ playing: boolean }>`
 	z-index: -1;
 	transition: opacity 0.6s ease-out;
 	opacity: ${({ playing }) => (playing ? 1 : 0.6)};
+	object-fit: contain;
 `;
 
 export const PlayButton = styled.button`
@@ -128,4 +130,8 @@ export const ProgressBar = styled.progress<{ playing: boolean }>`
 		background-color: ${({ theme }) => theme.color.background};
 		border-radius: 2px;
 	}
+`;
+
+export const PreviewWrapper = styled(View)`
+	opacity: 0.5;
 `;

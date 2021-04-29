@@ -20,7 +20,7 @@ export const NavCol = styled(Grid.Col)<NavCol>`
 			? css`
 					display: none;
 					@media (${constants.metrics.breakpoints.lg}) {
-						display: block;
+						display: flex;
 					}
 			  `
 			: ""}

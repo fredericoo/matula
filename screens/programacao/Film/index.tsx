@@ -11,12 +11,13 @@ import {
 	Video,
 	PlayButton,
 	ProgressBar,
+	PreviewWrapper,
 } from "./styles";
 import Button from "app/components/Button";
 import moment from "moment";
 import BodyText from "app/components/BodyText";
 import Picture from "app/components/Picture";
-import { useState, useEffect, forwardRef, RefObject, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import View from "app/components/View";
 
 type Film = {
@@ -25,6 +26,8 @@ type Film = {
 
 const Film: React.FC<Film> = ({ data }) => {
 	const [tillStart, setTillStart] = useState(moment(data.start).diff(moment()));
+	const timer = moment.duration(tillStart);
+	const isAvailable = moment.duration(tillStart).asSeconds() <= 0;
 
 	const videoRef = useRef<HTMLVideoElement>();
 	const [playing, setPlaying] = useState(false);
@@ -36,9 +39,6 @@ const Film: React.FC<Film> = ({ data }) => {
 				: (videoRef.current.pause(), (videoRef.current.currentTime = 0));
 		}
 	}, [playing]);
-
-	const timer = moment.duration(tillStart);
-	const isAvailable = moment.duration(tillStart).asSeconds() <= 0;
 
 	useEffect(() => {
 		const interval = setInterval(() => {
@@ -59,10 +59,13 @@ const Film: React.FC<Film> = ({ data }) => {
 		};
 	}, []);
 
+	const isVideo =
+		data.trailer.url && data.trailer.url.match(/\.(mp4|mov|webm)$/);
+
 	return (
 		<>
 			<Header>
-				{data.trailer.url && (
+				{isVideo ? (
 					<>
 						<Video
 							playing={playing}
@@ -76,10 +79,12 @@ const Film: React.FC<Film> = ({ data }) => {
 								type={`video/${data.trailer.url.match(/\.([^.]+)$/)[1]}`}
 							/>
 						</Video>
-						<ProgressBar playing={playing} max="100" value={videoProgress}>
-							Progress
-						</ProgressBar>
+						<ProgressBar playing={playing} max="100" value={videoProgress} />
 					</>
+				) : (
+					<PreviewWrapper>
+						<Picture src={data.trailer.url} layout="fill" objectFit="cover" />
+					</PreviewWrapper>
 				)}
 				<HeaderContent playing={playing}>
 					<div>
@@ -126,7 +131,7 @@ const Film: React.FC<Film> = ({ data }) => {
 						</Info>
 					</div>
 					<Actions sm={{ justify: "center", gap: "2rem" }}>
-						{data.trailer.url && (
+						{isVideo && (
 							<View sm={{ inline: true, direction: "column" }}>
 								<PlayButton onClick={() => setPlaying(!playing)}>
 									<svg
