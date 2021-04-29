@@ -84,7 +84,7 @@ const Programacao: React.FC<Screen & Programacao> = ({ data, current }) => {
 				</Sessions>
 			</NavCol>
 			<ContentCol md="col-4 / grid-end">
-				{Current && <Current data={current.data} />}
+				{Current && <Current key={current.uid} data={current.data} />}
 			</ContentCol>
 		</StyledGrid>
 	);
