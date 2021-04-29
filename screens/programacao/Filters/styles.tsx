@@ -18,6 +18,7 @@ export const Filter = styled.button<Filter>`
 	-webkit-appearance: none;
 	border: none;
 	background: none;
+	text-align: left;
 	padding: 0.5rem;
 	text-transform: uppercase;
 	font-size: ${constants.typography.size.vsmall};
