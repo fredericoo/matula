@@ -1,11 +1,6 @@
 import { Client } from "app/utils/prismic";
 import Prismic from "prismic-javascript";
-import Programacao from "app/screens/programacao";
-
-const Event = ({ doc, page }) => {
-	if (!doc || !doc.data) return null;
-	return <Programacao data={doc.data} current={page?.results[0]} />;
-};
+import Event from "app/screens/event";
 
 export const getStaticPaths = async () => {
 	const client = Client();
