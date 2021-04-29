@@ -25,7 +25,7 @@ type Image = {
 	alt?: string;
 };
 
-type Author = {
+export type Author = {
 	photo?: Image;
 	task?: string;
 	doer?: string;
