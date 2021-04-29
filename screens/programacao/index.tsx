@@ -8,6 +8,7 @@ import { NavCol, Sessions, StyledGrid, ContentCol } from "./styles";
 import { Document } from "prismic-javascript/types/documents";
 import Workshop from "./Workshop";
 import Film from "./Film";
+import Default from "./Default";
 const dateFormat = "YYYY-MM-DD";
 
 type Programacao = {
@@ -84,7 +85,11 @@ const Programacao: React.FC<Screen & Programacao> = ({ data, current }) => {
 				</Sessions>
 			</NavCol>
 			<ContentCol md="col-4 / grid-end">
-				{Current && <Current key={current.uid} data={current.data} />}
+				{Current ? (
+					<Current key={current.uid} data={current.data} />
+				) : (
+					<Default data={data} />
+				)}
 			</ContentCol>
 		</StyledGrid>
 	);
