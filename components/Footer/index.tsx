@@ -1,14 +1,22 @@
 import styled from "styled-components";
 import BodyText from "components/BodyText";
 import constants from "app/theme/constants";
+import Label from "../Label";
+import { FooterBody } from "./styles";
 
 const Footer = () => {
 	return (
 		<FooterWrapper>
-			<BodyText>
-				<h4>Realização</h4>
-				<p>Le petit</p>
-			</BodyText>
+			<FooterBody>
+				<li>
+					<Label as="h4">Realização</Label>
+					<p>Le petit</p>
+				</li>
+				<li>
+					<Label as="h4">Website</Label>
+					<p>Penumbra design et web</p>
+				</li>
+			</FooterBody>
 		</FooterWrapper>
 	);
 };

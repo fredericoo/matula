@@ -28,6 +28,7 @@ const HeaderTitle = styled.h1`
 `;
 const HeaderBody = styled(BodyText)`
 	color: ${({ theme }) => theme.color.secondary};
+	padding-bottom: 2rem;
 `;
 
 const DatesTitle = styled.h2`
@@ -57,14 +58,34 @@ const DatesTitle = styled.h2`
 	}
 `;
 
+const VideoEmbed = styled.div`
+	width: 100%;
+	height: 0px;
+	position: relative;
+	padding-bottom: 56.18%;
+	& > * {
+		position: absolute;
+		height: 100%;
+		width: 100%;
+		top: 0;
+		left: 0;
+	}
+`;
+
 export default function Home({ doc }) {
 	if (!doc) return null;
 	return (
 		<HomeGrid sm="10">
 			<SEO />
+			<Grid.Col xl={{ col: "col-5 / grid-end", align: "center" }}>
+				{doc.data.teaser.html && (
+					<VideoEmbed
+						dangerouslySetInnerHTML={{ __html: doc.data.teaser.html }}
+					/>
+				)}
+			</Grid.Col>
 			<HeaderCol
 				sm="grid-start / grid-end"
-				lg={{ col: "grid-start / col-6", row: 1, align: "end" }}
 				xl={{ col: "grid-start / col-4", row: 1, align: "end" }}
 			>
 				<HeaderView
