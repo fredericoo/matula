@@ -62,7 +62,7 @@ const Header = styled.h3`
 	text-align: center;
 	padding: 1rem;
 	color: ${({ theme }) => theme.color.secondary};
-	font-size: ${constants.typography.size.medium};
+	font-size: ${constants.typography.size.small};
 	font-family: ${constants.typography.font.headings};
 	font-weight: ${constants.typography.weight.regular};
 	text-transform: uppercase;
