@@ -5,6 +5,7 @@ import constants from "app/theme/constants";
 
 export const StyledGrid = styled(Grid)`
 	overflow: hidden;
+	height: 100%;
 `;
 
 type NavCol = { isSingle?: boolean };
