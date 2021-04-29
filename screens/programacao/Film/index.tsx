@@ -12,6 +12,10 @@ import {
 	PlayButton,
 	ProgressBar,
 	PreviewWrapper,
+	ChefTitle,
+	RestaurantItem,
+	Biome,
+	Links,
 } from "./styles";
 import Button from "app/components/Button";
 import moment from "moment";
@@ -201,6 +205,53 @@ const Film: React.FC<Film> = ({ data }) => {
 					</BodyText>
 				</Grid.Col>
 			</ContentGrid>
+			{!!data.sugestao?.length && data.sugestao[0].s_title && (
+				<ContentGrid sm="7">
+					<Grid.Col>
+						<ChefTitle>Sugestão do chef</ChefTitle>
+					</Grid.Col>
+					{data.sugestao.map(
+						({
+							photo: image,
+							s_restaurant: restaurant,
+							s_title: title,
+							s_short: short,
+							s_bioma: biome,
+							s_link: links,
+						}) => (
+							<>
+								<RestaurantItem>
+									<h3>
+										<Text content={title} asText />
+										<Biome>{biome}</Biome>
+									</h3>
+									<h4>
+										<Text content={restaurant} asText />
+									</h4>
+								</RestaurantItem>
+								<Grid.Col lg="grid-start / col-4">
+									<BodyText>
+										<Text content={short} />
+									</BodyText>
+
+									<Links>
+										<Text content={links} />
+									</Links>
+								</Grid.Col>
+								<Grid.Col lg="col-4 / grid-end">
+									{image && (
+										<Picture
+											src={image.url}
+											width={image.dimensions.width}
+											height={image.dimensions.height}
+										/>
+									)}
+								</Grid.Col>
+							</>
+						)
+					)}
+				</ContentGrid>
+			)}
 		</>
 	);
 };
