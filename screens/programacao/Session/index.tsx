@@ -7,6 +7,8 @@ import { RichText } from "prismic-reactjs";
 import { hrefResolver } from "app/prismic-config";
 import { Document } from "prismic-javascript/types/documents";
 import { useRouter } from "next/router";
+import { Author } from "../Workshop";
+import { Label, NoBreak } from "./styles";
 
 type Session = {
 	day: Moment;
@@ -41,9 +43,19 @@ const Session: React.FC<Session> = ({ day, title, items }) => {
 								type={row.data.type}
 								title={row.data.title}
 								subtitle={
-									row.type === "sessao"
-										? `direção ${row.data.director}`
-										: `com ${row.data.by}`
+									row.type === "sessao" ? (
+										<>
+											<Label>Com</Label> {row.data.director}
+										</>
+									) : (
+										row.data.by?.map(({ task, doer }: Author) => (
+											<>
+												<p>
+													<Label>{task}</Label> <NoBreak>{doer}</NoBreak>
+												</p>
+											</>
+										))
+									)
 								}
 								start={row.data.start}
 								end={row.data.end}
