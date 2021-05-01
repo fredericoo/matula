@@ -5,6 +5,7 @@ import Sobre from "app/screens/sobre";
 import Contato from "app/screens/contato";
 import ParaTodos from "app/screens/para-todos";
 import PraViagem from "app/screens/pra-viagem";
+import Stories from "app/screens/stories";
 
 export type Screen = { data: any };
 
@@ -15,6 +16,7 @@ const screens: Screens = {
 	contato: Contato,
 	"para-todos": ParaTodos,
 	"pra-viagem": PraViagem,
+	stories: Stories,
 };
 
 export const Page: React.FC<{ doc: any }> = ({ doc }) => {

@@ -1,6 +1,5 @@
 import { Screen } from "app/pages/[type]";
-import Grid from "app/components/Grid";
-import moment, { Moment } from "moment";
+import moment from "moment";
 import Session from "./Session";
 import { useState, useMemo } from "react";
 import Filters from "./Filters";
@@ -9,20 +8,11 @@ import { Document } from "prismic-javascript/types/documents";
 import Workshop from "./Workshop";
 import Film from "./Film";
 import Default from "./Default";
-const dateFormat = "YYYY-MM-DD";
+import { DaySlice } from "./types";
+import { dateFormat } from "./constants";
 
 type Programacao = {
 	current?: Document;
-};
-type DaySlice = {
-	primary: Primary;
-	body: any;
-	day?: Moment;
-	items?: any[];
-};
-type Primary = {
-	session_day: string;
-	session_title: string;
 };
 
 const contentFromType = (type: string) => {
