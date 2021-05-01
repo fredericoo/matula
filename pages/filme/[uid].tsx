@@ -47,6 +47,7 @@ export const getStaticProps = async ({ params, locale }) => {
 	);
 	return {
 		props: { doc: doc || {}, page: page || {} },
+		revalidate: 60,
 	};
 };
 
