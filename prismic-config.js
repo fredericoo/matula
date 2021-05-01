@@ -19,6 +19,8 @@ module.exports = {
 
 	// Additional helper function for Next/Link component
 	hrefResolver: function (doc) {
+		if (doc.link_type == "Web") return doc.url;
+
 		switch (doc.type) {
 			case "home":
 				return `/`;

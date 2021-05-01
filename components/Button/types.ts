@@ -8,6 +8,7 @@ interface Button {
 export interface ButtonLink extends Button {
 	href: string;
 	onClick?: never;
+	target?: "_self" | "_blank";
 }
 
 export interface ButtonButton extends Button {

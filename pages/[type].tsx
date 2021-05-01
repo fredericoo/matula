@@ -3,6 +3,8 @@ import Programacao from "app/screens/programacao";
 import SEO from "app/components/SEO";
 import Sobre from "app/screens/sobre";
 import Contato from "app/screens/contato";
+import ParaTodos from "app/screens/para-todos";
+import PraViagem from "app/screens/pra-viagem";
 
 export type Screen = { data: any };
 
@@ -11,6 +13,8 @@ const screens: Screens = {
 	programacao: Programacao,
 	sobre: Sobre,
 	contato: Contato,
+	"para-todos": ParaTodos,
+	"pra-viagem": PraViagem,
 };
 
 export const Page: React.FC<{ doc: any }> = ({ doc }) => {
