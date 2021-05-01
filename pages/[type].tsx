@@ -67,6 +67,7 @@ export const getStaticProps = async ({ params, locale }) => {
 			"sessao.start",
 			"sessao.end",
 			"sessao.director",
+			"sessao.tag",
 			"oficina.title",
 			"oficina.type",
 			"oficina.start",

@@ -8,7 +8,7 @@ import { hrefResolver } from "app/prismic-config";
 import { Document } from "prismic-javascript/types/documents";
 import { useRouter } from "next/router";
 import { Author } from "../Workshop";
-import { Label, NoBreak, Header } from "./styles";
+import { Label, NoBreak, Header, StyledLi } from "./styles";
 
 type Session = {
 	day: Moment;
@@ -22,7 +22,7 @@ const Session: React.FC<Session> = ({ day, title, items }) => {
 	if (!items.length) return null;
 
 	return (
-		<li>
+		<StyledLi>
 			<Header>
 				{day.format("DD/MM")}{" "}
 				{!!title.length && (
@@ -37,6 +37,8 @@ const Session: React.FC<Session> = ({ day, title, items }) => {
 						.filter(({ row }) => row.data)
 						.map(({ row }) => (
 							<Entry
+								tag={row.data?.tag}
+								docType={row.type}
 								active={asPath === hrefResolver(row)}
 								href={hrefResolver(row)}
 								key={RichText.asText(row.data.title)}
@@ -63,7 +65,7 @@ const Session: React.FC<Session> = ({ day, title, items }) => {
 							/>
 						))}
 			</ol>
-		</li>
+		</StyledLi>
 	);
 };
 

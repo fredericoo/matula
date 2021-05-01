@@ -31,3 +31,5 @@ export const Header = styled.h3`
 	background: ${({ theme }) => theme.color.background};
 	z-index: 2;
 `;
+
+export const StyledLi = styled.li``;

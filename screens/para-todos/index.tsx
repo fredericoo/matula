@@ -8,15 +8,16 @@ import { Document } from "prismic-javascript/types/documents";
 import Button from "app/components/Button";
 import { hrefResolver } from "app/prismic-config";
 import Picture from "app/components/Picture";
+import { PageHeading, StyledGrid, ProjectHeading } from "./styles";
 
 const ParaTodos: React.FC<Screen> = ({ data }) => {
 	return (
-		<Grid sm="10">
+		<StyledGrid sm="10">
 			<Grid.Col>
 				{data.donation_title && (
-					<h1>
+					<PageHeading>
 						<Text content={data.donation_title} asText />
-					</h1>
+					</PageHeading>
 				)}
 				{data.donation_text && (
 					<BodyText>
@@ -37,7 +38,7 @@ const ParaTodos: React.FC<Screen> = ({ data }) => {
 						/>
 					))}
 			</Grid.Col>
-		</Grid>
+		</StyledGrid>
 	);
 };
 
@@ -55,9 +56,9 @@ const Project: React.FC<ProjectProps> = ({ title, text, link, image }) => {
 	return (
 		<li>
 			{title && (
-				<h2>
+				<ProjectHeading>
 					<Text content={title} asText />
-				</h2>
+				</ProjectHeading>
 			)}
 			{text && (
 				<BodyText>

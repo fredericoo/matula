@@ -49,9 +49,14 @@ export const StyledButton = styled.button<ButtonButton | ButtonLink>`
 	font-family: ${constants.typography.font.headings};
 	font-weight: ${constants.typography.weight.regular};
 	text-transform: uppercase;
+	display: inline-block;
 
 	${({ size }) => buttonSizes[size] || ""}
 	${({ type }) => buttonStyles[type] || ""}
     ${({ disabled }) =>
 		disabled ? disabledStyles : ""}
+		
+		&:hover {
+		text-decoration: none;
+	}
 `;
