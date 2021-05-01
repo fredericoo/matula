@@ -239,7 +239,7 @@ const Film: React.FC<Film> = ({ data }) => {
 									</Links>
 								</Grid.Col>
 								<Grid.Col lg="col-4 / grid-end">
-									{image && (
+									{image?.url && (
 										<Picture
 											src={image.url}
 											width={image.dimensions.width}
