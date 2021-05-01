@@ -2,6 +2,7 @@ import { css } from "styled-components";
 
 export const hatchBackground = css`
 	position: relative;
+	z-index: 1;
 	&:before {
 		content: "";
 		display: block;
