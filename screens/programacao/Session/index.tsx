@@ -45,7 +45,8 @@ const Session: React.FC<Session> = ({ day, title, items }) => {
 								subtitle={
 									row.type === "sessao" ? (
 										<>
-											<Label>Com</Label> {row.data.director}
+											<Label>Direção</Label>{" "}
+											<NoBreak>{row.data.director}</NoBreak>
 										</>
 									) : (
 										row.data.by?.map(({ task, doer }: Author) => (

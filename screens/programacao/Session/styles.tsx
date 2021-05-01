@@ -12,4 +12,5 @@ export const Label = styled.span`
 
 export const NoBreak = styled.span`
 	white-space: nowrap;
+	letter-spacing: 0.04em;
 `;
