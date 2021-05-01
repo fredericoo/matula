@@ -3,8 +3,7 @@ import { Screen } from "app/pages/[type]";
 import Text from "app/components/Text";
 import BodyText from "app/components/BodyText";
 import Picture from "app/components/Picture";
-import { Title, StyledGrid } from "./styles";
-import View from "app/components/View";
+import { Title, StyledGrid, DecoCol } from "./styles";
 
 const Sobre: React.FC<Screen> = ({ data }) => {
 	return (
@@ -96,19 +95,17 @@ const Sobre: React.FC<Screen> = ({ data }) => {
 						/>
 					)}
 				</Grid.Col>
-				<Grid.Col lg={{ col: "col-9 / grid-end", row: 1, align: "end" }}>
+				<DecoCol lg={{ col: "col-9 / grid-end", row: 1, align: "end" }}>
 					{data.icon2?.url && (
-						<View lg={{ padding: "0 2rem", margin: "0 0 -2rem 0" }}>
-							<Picture
-								src={data.icon2.url}
-								width={data.icon2.dimensions.width}
-								height={data.icon2.dimensions.height}
-								alt={data.icon2.dimensions.alt}
-								layout="responsive"
-							/>
-						</View>
+						<Picture
+							src={data.icon2.url}
+							width={data.icon2.dimensions.width}
+							height={data.icon2.dimensions.height}
+							alt={data.icon2.dimensions.alt}
+							layout="responsive"
+						/>
 					)}
-				</Grid.Col>
+				</DecoCol>
 			</StyledGrid>
 			<StyledGrid sm={{ cols: 10, gap: "2rem" }}>
 				<Grid.Col>

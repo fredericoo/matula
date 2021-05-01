@@ -13,3 +13,8 @@ export const Title = styled.h1`
 	font-size: ${constants.typography.size.vlarge};
 	color: ${({ theme }) => theme.color.secondary};
 `;
+
+export const DecoCol = styled(Grid.Col)`
+	padding: 2rem;
+	margin-bottom: -4rem;
+`;
