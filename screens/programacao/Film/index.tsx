@@ -38,7 +38,7 @@ const Film: React.FC<Film> = ({ data }) => {
 	const duration = moment.duration(moment(data.start).diff(data.end));
 	const tillEnd = moment.duration(moment(data.end).diff(now));
 
-	const isAvailable = tillStart.asSeconds() <= 0;
+	const isAvailable = tillStart.asSeconds() <= 0 && tillEnd.asSeconds() >= 0;
 
 	const isVideo =
 		data.trailer.url && data.trailer.url.match(/\.(mp4|mov|webm)$/);
@@ -182,18 +182,24 @@ const Film: React.FC<Film> = ({ data }) => {
 							</Button>
 							{!isAvailable && (
 								<small>
-									disponível em{" "}
-									{tillStart.asDays() > 1 ? (
-										<span>
-											{Math.floor(tillStart.asDays())} dia
-											{tillStart.asDays() > 1 ? "s" : ""}
-										</span>
+									{tillEnd.asSeconds() > 0 ? (
+										<>
+											disponível em{" "}
+											{tillStart.asDays() > 1 ? (
+												<span>
+													{Math.floor(tillStart.asDays())} dia
+													{tillStart.asDays() > 1 ? "s" : ""}
+												</span>
+											) : (
+												<span>
+													{String(tillStart.hours()).padStart(2, "0")}:
+													{String(tillStart.minutes()).padStart(2, "0")}:
+													{String(tillStart.seconds()).padStart(2, "0")}
+												</span>
+											)}
+										</>
 									) : (
-										<span>
-											{String(tillStart.hours()).padStart(2, "0")}:
-											{String(tillStart.minutes()).padStart(2, "0")}:
-											{String(tillStart.seconds()).padStart(2, "0")}
-										</span>
+										"Este filme não está mais disponível"
 									)}
 								</small>
 							)}
