@@ -6,6 +6,7 @@ import Contato from "app/screens/contato";
 import ParaTodos from "app/screens/para-todos";
 import PraViagem from "app/screens/pra-viagem";
 import Stories from "app/screens/stories";
+import { RichText } from "prismic-reactjs";
 
 export type Screen = { data: any };
 
@@ -27,7 +28,12 @@ export const Page: React.FC<{ doc: any }> = ({ doc }) => {
 		return (
 			<>
 				<SEO
-					title={doc.data.seo_title || doc.data.title}
+					title={
+						doc.data.seo_title ||
+						(doc.data.title && Array.isArray(doc.data.title))
+							? RichText.asText(doc.data.title)
+							: doc.data.title
+					}
 					description={doc.data.seo_desc}
 					image={doc.data.seo_img?.url}
 				/>

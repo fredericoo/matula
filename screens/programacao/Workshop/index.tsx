@@ -1,7 +1,7 @@
 import Grid from "app/components/Grid";
 import Text from "app/components/Text";
 import BodyText from "app/components/BodyText";
-import { RichTextBlock } from "prismic-reactjs";
+import { RichTextBlock, RichText } from "prismic-reactjs";
 import Picture from "app/components/Picture";
 import {
 	WrapperGrid,
@@ -14,6 +14,7 @@ import {
 	VideoEmbed,
 } from "./styles";
 import moment from "moment";
+import SEO from "app/components/SEO";
 
 type Workshop = {
 	data: any;
@@ -35,6 +36,15 @@ export type Author = {
 const Workshop: React.FC<Workshop> = ({ data }) => {
 	return (
 		<WrapperGrid lg={{ gap: "2rem", cols: 7 }}>
+			<SEO
+				title={
+					data.seo_title || (data.title && Array.isArray(data.title))
+						? RichText.asText(data.title)
+						: data.title
+				}
+				description={data.seo_desc}
+				image={data.seo_img?.url}
+			/>
 			{data.embed?.html && (
 				<Grid.Col>
 					<VideoEmbed dangerouslySetInnerHTML={{ __html: data.embed.html }} />

@@ -23,6 +23,8 @@ import BodyText from "app/components/BodyText";
 import Picture from "app/components/Picture";
 import { useState, useEffect, useRef } from "react";
 import View from "app/components/View";
+import SEO from "app/components/SEO";
+import { RichText } from "prismic-reactjs";
 
 type Film = {
 	data: any;
@@ -68,6 +70,15 @@ const Film: React.FC<Film> = ({ data }) => {
 
 	return (
 		<>
+			<SEO
+				title={
+					data.seo_title || (data.title && Array.isArray(data.title))
+						? RichText.asText(data.title)
+						: data.title
+				}
+				description={data.seo_desc}
+				image={data.seo_img?.url}
+			/>
 			<Header>
 				{isVideo ? (
 					<>
