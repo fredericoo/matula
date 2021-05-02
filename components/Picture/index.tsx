@@ -20,7 +20,8 @@ const StyledImage = styled(Image)<LazyLoadPicture>`
 	opacity: ${({ hasLoaded }: LazyLoadPicture) => (hasLoaded ? 1 : 0)};
 `;
 
-const Picture = (props: ImageProps & Picture) => {
+const Picture: React.FC<ImageProps & Picture> = (props) => {
+	if (!props.src) return null;
 	const [hasLoaded, setLoaded] = useState<boolean>(false);
 	const fixImageSrc = (src: string) => src.replace("auto=compress,format", "");
 
