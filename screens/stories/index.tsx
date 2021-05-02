@@ -1,6 +1,6 @@
 import { Screen } from "app/pages/[type]";
 import Grid from "app/components/Grid";
-import { StyledGrid } from "./style";
+import { StyledGrid, Title } from "./style";
 import Text from "app/components/Text";
 import { Client } from "app/utils/prismic";
 import { useRouter } from "next/router";
@@ -37,27 +37,41 @@ const Stories: React.FC<Screen> = ({ data }) => {
 	return (
 		<StyledGrid sm="10">
 			<Grid.Col lg="grid-start / col-4">
-				<h1>
+				<Title>
 					<Text content={data.title} asText />
-				</h1>
+				</Title>
 				<BodyText>
 					<Text content={data.text} />
 				</BodyText>
 			</Grid.Col>
+
 			<Grid.Col lg="col-4 / col-8">
 				<Builder ref={storiesRef} data={programacao?.data} />
 			</Grid.Col>
+
 			<Grid.Col lg="col-8 / grid-end">
 				{storiesRef && (
 					<Button
 						onClick={async () => {
 							if (window !== undefined && storiesRef) {
+								document.body.scrollTop = 0;
+								document.documentElement.scrollTop = 0;
+
 								const exportComponentAsPNG = (
 									await import("react-component-export-image")
 								).exportComponentAsPNG;
-								exportComponentAsPNG(storiesRef, {
-									fileName: "minha-matula",
-								});
+
+								setTimeout(
+									() =>
+										exportComponentAsPNG(storiesRef, {
+											fileName: "minha-matula",
+											html2CanvasOptions: {
+												scrollX: 0,
+												scrollY: window.scrollY,
+											},
+										}),
+									100
+								);
 							}
 						}}
 					>

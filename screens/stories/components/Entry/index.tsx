@@ -22,7 +22,7 @@ const Entry: React.FC<Entry> = ({ title, start, initialState = false }) => {
 					height="24"
 					viewBox="0 0 24 24"
 					fill="none"
-					stroke="currentColor"
+					stroke="#e66617"
 					strokeWidth="2"
 					strokeLinecap="butt"
 				>

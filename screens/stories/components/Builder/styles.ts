@@ -29,7 +29,7 @@ export const Content = styled.div`
 	flex-direction: column;
 	background: ${({ theme }) => theme.color.background};
 	position: absolute;
-	padding: 4.25%;
+	padding: 2.25%;
 	box-shadow: 0 0.4px 0.7px rgba(0, 0, 0, 0.088),
 		0 1px 1.7px rgba(0, 0, 0, 0.097), 0 1.9px 3.4px rgba(0, 0, 0, 0.096),
 		0 4px 6.9px rgba(0, 0, 0, 0.092), 0 11px 19px rgba(0, 0, 0, 0.09);
@@ -49,7 +49,9 @@ export const Body = styled.div`
 `;
 
 export const Footer = styled.div`
-	margin-top: 3%;
+	position: absolute;
+	bottom: -5%;
+	right: 5%;
 	text-align: center;
 	font-family: ${constants.typography.font.headings};
 	text-transform: uppercase;
@@ -59,8 +61,8 @@ export const Footer = styled.div`
 `;
 
 export const LogoSvg = styled.svg`
-	width: 100%;
-	height: 15%;
-	fill: ${({ theme }) => theme.color.primary};
-	margin-bottom: 5%;
+	width: 80%;
+	height: 20%;
+	margin-bottom: 10%;
+	transform: rotate(-5deg);
 `;

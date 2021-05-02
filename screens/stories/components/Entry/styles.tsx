@@ -2,7 +2,7 @@ import styled, { css } from "styled-components";
 import constants from "app/theme/constants";
 
 export const Wrapper = styled.div`
-	overflow-x: hidden;
+	overflow: hidden;
 	display: grid;
 	grid-template-columns: 1.5em 1fr min-content;
 	color: ${({ theme }) => theme.color.primary};
@@ -26,8 +26,7 @@ export const Checkbox = styled.div<{ isChecked?: boolean }>`
 		top: 0;
 		left: 0;
 		position: absolute;
-		stroke: ${({ theme, isChecked }) =>
-			isChecked ? theme.color.secondary : "transparent"};
+		visibility: ${({ isChecked }) => (isChecked ? "visible" : "hidden")};
 		display: block;
 	}
 `;
