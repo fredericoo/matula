@@ -18,9 +18,9 @@ export const StyledFrame = styled.div`
 	@media (${constants.metrics.breakpoints.lg}) {
 		height: calc(100vh - 2rem);
 		grid:
-			"logo content content" min-content
-			"nav content content" minmax(100px, 1fr)
-			"tools tools footer" min-content / min-content 6fr 4fr;
+			"logo content content content" min-content
+			"nav content content content" minmax(100px, 1fr)
+			"footer tools tools icons" min-content / min-content 1fr min-content;
 		border: solid ${({ theme }) => theme.color.border};
 		border-width: 0 0 1px 1px;
 	}

@@ -40,6 +40,7 @@ function App({ Component, pageProps }: AppProps): JSX.Element {
 							<Frame.Section gridArea="footer">
 								<Footer />
 							</Frame.Section>
+							<Frame.Section gridArea="icons"></Frame.Section>
 						</Frame>
 					</ConfigProvider>
 				</CurrentTimeProvider>
