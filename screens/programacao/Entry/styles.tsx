@@ -1,9 +1,10 @@
 import styled, { css } from "styled-components";
 import constants from "app/theme/constants";
-import { hatchBackground } from "app/theme/effects";
+import { hatchBackground, hideScrollbars } from "app/theme/effects";
 
 export const Wrapper = styled.a<{ active: boolean }>`
-	overflow-x: hidden;
+	overflow: hidden;
+	${hideScrollbars}
 	display: grid;
 	grid-template-columns: 4rem 1fr;
 	color: ${({ theme }) => theme.color.primary};
