@@ -3,13 +3,14 @@ import moment from "moment";
 import Session from "./Session";
 import { useState, useMemo } from "react";
 import Filters from "./Filters";
-import { NavCol, Sessions, StyledGrid, ContentCol } from "./styles";
+import { NavCol, Sessions, StyledGrid, ContentCol, Stories } from "./styles";
 import { Document } from "prismic-javascript/types/documents";
 import Workshop from "./Workshop";
 import Film from "./Film";
 import Default from "./Default";
 import { DaySlice } from "./types";
 import { dateFormat } from "./constants";
+import Link from "next/link";
 
 type Programacao = {
 	current?: Document;
@@ -73,6 +74,11 @@ const Programacao: React.FC<Screen & Programacao> = ({ data, current }) => {
 						/>
 					))}
 				</Sessions>
+				<Stories>
+					<Link href="/stories">
+						<a>Monte a sua</a>
+					</Link>
+				</Stories>
 			</NavCol>
 			<ContentCol md="col-4 / grid-end">
 				{Current ? (

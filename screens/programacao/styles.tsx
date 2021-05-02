@@ -39,3 +39,17 @@ export const Sessions = styled.ul`
 	height: 100%;
 	${hideScrollbars}
 `;
+
+export const Stories = styled.div`
+	a {
+		display: block;
+		text-align: center;
+		background: ${({ theme }) => theme.color.secondary};
+		color: ${({ theme }) => theme.color.background};
+		font-family: ${constants.typography.font.headings};
+		text-transform: uppercase;
+		font-size: ${constants.typography.size.vsmall};
+		font-weight: ${constants.typography.weight.regular};
+		padding: 0.5em;
+	}
+`;
