@@ -9,7 +9,8 @@ export const hatchBackground = css`
 		width: calc(100% - 0.5rem);
 		height: calc(100% - 0.5rem);
 		position: absolute;
-		background: url("/img/hatch-green.svg");
+		background: url("/img/hatch-green.svg"),
+			${({ theme }) => theme.color.background};
 		background-size: 4px;
 		top: 0.25rem;
 		left: 0.25rem;

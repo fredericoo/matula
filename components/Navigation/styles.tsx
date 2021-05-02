@@ -44,12 +44,8 @@ export const StyledLi = styled(motion.li)<ListItem>`
 		padding: 1rem 1rem calc(env(safe-area-inset-bottom, 1rem) + 1rem) 1rem;
 	}
 	text-transform: uppercase;
-	${({ active, theme }) =>
-		active
-			? hatchBackground
-			: `
-					background: ${theme.color.background};
-			  `};
+	${({ active }) => (active ? hatchBackground : "")};
+	background: ${({ theme }) => theme.color.background};
 	color: ${({ theme }) => theme.color.primary};
 
 	@media (${constants.metrics.breakpoints.md}) {
@@ -76,5 +72,5 @@ export const BackgroundPicture = styled(Picture)`
 	position: absolute;
 	bottom: 0;
 	width: 100%;
-	z-index: 1;
+	z-index: -1;
 `;
