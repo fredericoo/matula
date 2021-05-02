@@ -46,6 +46,7 @@ export const Header = styled.header`
 
 export const Body = styled.div`
 	flex-grow: 1;
+	z-index: 2;
 `;
 
 export const Footer = styled.div`
@@ -63,6 +64,8 @@ export const Footer = styled.div`
 export const LogoSvg = styled.svg`
 	width: 80%;
 	height: 20%;
-	margin-bottom: 10%;
+	margin-bottom: 20%;
 	transform: rotate(-5deg);
+	pointer-events: none;
+	z-index: 1;
 `;

@@ -11,17 +11,18 @@ export const Wrapper = styled.div`
 	font-size: ${constants.typography.size.small};
 	font-weight: ${constants.typography.weight.regular};
 	border-bottom: 1px dotted;
+	@media (pointer: fine) {
+		&:hover {
+			background: ${({ theme }) => theme.color.tertiary};
+		}
+	}
 `;
 
 export const Checkbox = styled.div<{ isChecked?: boolean }>`
 	border-right: 1px solid;
 	position: relative;
 	height: 100%;
-	@media (pointer: fine) {
-		&:hover {
-			background: ${({ theme }) => theme.color.tertiary};
-		}
-	}
+
 	svg {
 		top: 0;
 		left: 0;

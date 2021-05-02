@@ -14,8 +14,8 @@ const Entry: React.FC<Entry> = ({ title, start, initialState = false }) => {
 	const [isChecked, setChecked] = useState(initialState);
 
 	return (
-		<Wrapper>
-			<Checkbox onClick={() => setChecked(!isChecked)} isChecked={isChecked}>
+		<Wrapper onClick={() => setChecked(!isChecked)}>
+			<Checkbox isChecked={isChecked}>
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
 					width="24"
