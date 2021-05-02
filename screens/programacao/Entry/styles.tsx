@@ -33,11 +33,11 @@ export const Date = styled.time`
 	border-right: 1px solid;
 	padding: 1rem;
 	text-transform: lowercase;
-	position: relative;
 `;
 
 export const Details = styled.div`
 	padding: 1rem;
+	position: relative;
 `;
 
 export const Type = styled.p`
@@ -63,7 +63,7 @@ export const Stamp = styled.span`
 	padding: 0.5em;
 	text-transform: uppercase;
 	color: ${({ theme }) => theme.color.secondary};
-	left: 0.25em;
+	right: 0.25em;
 	top: 0.5em;
 	transform: rotate(-4deg);
 	mix-blend-mode: multiply;
@@ -77,7 +77,7 @@ export const Progress = styled.div<{
 	width: 0.25rem;
 	height: ${({ percentage }) => percentage}%;
 	top: 0;
-	right: -0.125rem;
+	left: -0.125rem;
 	background: ${({ isAvailable, theme }) =>
 		isAvailable ? theme.color.tertiary : theme.color.secondary};
 	${({ percentage }) => (percentage < 100 ? thumbtack : "")}

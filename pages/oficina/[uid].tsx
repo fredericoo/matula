@@ -43,6 +43,14 @@ export const getStaticProps = async ({ params, locale }) => {
 		Prismic.Predicates.at("my.oficina.uid", params.uid),
 		{
 			lang: locale,
+			fetchLinks: [
+				"sugestoes.photo",
+				"sugestoes.s_restaurant",
+				"sugestoes.s_title",
+				"sugestoes.s_short",
+				"sugestoes.s_bioma",
+				"sugestoes.s_link",
+			],
 		}
 	);
 	return {

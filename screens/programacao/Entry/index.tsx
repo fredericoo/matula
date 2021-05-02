@@ -52,23 +52,7 @@ const Entry: React.FC<Entry> = ({
 	return (
 		<Link href={href} passHref>
 			<Wrapper active={active}>
-				<Date>
-					{moment(start).format("HH[h]mm").replace(/0+$/, "")}
-					{tillStart <= 0 && tillEnd >= 0 && <Stamp>LIVE</Stamp>}
-					{tillStart <= 0 && tillEnd <= 0 ? (
-						<Progress
-							isAvailable={docType === "sessao" ? false : true}
-							percentage={100}
-						/>
-					) : (
-						tillStart <= 0 && (
-							<Progress
-								isAvailable={true}
-								percentage={Math.floor(100 + (tillEnd * 100) / duration)}
-							></Progress>
-						)
-					)}
-				</Date>
+				<Date>{moment(start).format("HH[h]mm").replace(/00$/, "")}</Date>
 				<Details>
 					<Type>
 						<Text content={type} />
@@ -81,6 +65,22 @@ const Entry: React.FC<Entry> = ({
 						<Tag>
 							<Text content={tag} asText />
 						</Tag>
+					)}
+					{tillStart <= 0 && tillEnd >= 0 && (
+						<Stamp>{docType === "sessao" ? "ASSISTA" : "LIVE"}</Stamp>
+					)}
+					{tillStart <= 0 && tillEnd <= 0 ? (
+						<Progress
+							isAvailable={docType === "sessao" ? false : true}
+							percentage={100}
+						/>
+					) : (
+						tillStart <= 0 && (
+							<Progress
+								isAvailable={true}
+								percentage={Math.floor(100 + (tillEnd * 100) / duration)}
+							></Progress>
+						)
 					)}
 				</Details>
 			</Wrapper>

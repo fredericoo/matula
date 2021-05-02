@@ -25,16 +25,23 @@ import { useState, useEffect, useRef } from "react";
 import View from "app/components/View";
 import SEO from "app/components/SEO";
 import { RichText } from "prismic-reactjs";
+import useCurrentTime from "app/utils/hooks/useCurrentTime";
+import { groupHasItems } from "app/utils/prismic";
 
 type Film = {
 	data: any;
 };
 
 const Film: React.FC<Film> = ({ data }) => {
-	const [tillStart, setTillStart] = useState(moment(data.start).diff(moment()));
-	const timer = moment.duration(tillStart);
-	const isAvailable = moment.duration(tillStart).asSeconds() <= 0;
+	const now = useCurrentTime();
+	const tillStart = moment.duration(moment(data.start).diff(now));
+	const duration = moment.duration(moment(data.start).diff(data.end));
+	const tillEnd = moment.duration(moment(data.end).diff(now));
 
+	const isAvailable = tillStart.asSeconds() <= 0;
+
+	const isVideo =
+		data.trailer.url && data.trailer.url.match(/\.(mp4|mov|webm)$/);
 	const videoRef = useRef<HTMLVideoElement>();
 	const [playing, setPlaying] = useState(false);
 	const [videoProgress, setVideoProgress] = useState(0);
@@ -48,7 +55,6 @@ const Film: React.FC<Film> = ({ data }) => {
 
 	useEffect(() => {
 		const interval = setInterval(() => {
-			setTillStart(moment(data.start).diff(moment()));
 			if (videoRef.current) {
 				if (videoRef.current.currentTime === videoRef.current.duration) {
 					setPlaying(false);
@@ -64,9 +70,6 @@ const Film: React.FC<Film> = ({ data }) => {
 			clearInterval(interval);
 		};
 	}, []);
-
-	const isVideo =
-		data.trailer.url && data.trailer.url.match(/\.(mp4|mov|webm)$/);
 
 	return (
 		<>
@@ -180,16 +183,16 @@ const Film: React.FC<Film> = ({ data }) => {
 							{!isAvailable && (
 								<small>
 									disponível em{" "}
-									{timer.asDays() > 1 ? (
+									{tillStart.asDays() > 1 ? (
 										<span>
-											{Math.floor(timer.asDays())} dia
-											{timer.asDays() > 1 ? "s" : ""}
+											{Math.floor(tillStart.asDays())} dia
+											{tillStart.asDays() > 1 ? "s" : ""}
 										</span>
 									) : (
 										<span>
-											{String(timer.hours()).padStart(2, "0")}:
-											{String(timer.minutes()).padStart(2, "0")}:
-											{String(timer.seconds()).padStart(2, "0")}
+											{String(tillStart.hours()).padStart(2, "0")}:
+											{String(tillStart.minutes()).padStart(2, "0")}:
+											{String(tillStart.seconds()).padStart(2, "0")}
 										</span>
 									)}
 								</small>
@@ -216,20 +219,23 @@ const Film: React.FC<Film> = ({ data }) => {
 					</BodyText>
 				</Grid.Col>
 			</ContentGrid>
-			{!!data.sugestao?.length && data.sugestao[0].s_title && (
+			{groupHasItems(data.chef) && (
 				<ContentGrid sm="7">
 					<Grid.Col>
 						<ChefTitle>Sugestão do chef</ChefTitle>
 					</Grid.Col>
-					{data.sugestao.map(
-						({
+					{data.chef.map((entry) => {
+						if (!entry.chef_item?.data) return null;
+						const {
 							photo: image,
 							s_restaurant: restaurant,
 							s_title: title,
 							s_short: short,
 							s_bioma: biome,
 							s_link: links,
-						}) => (
+						} = entry.chef_item.data;
+
+						return (
 							<>
 								<RestaurantItem>
 									<h3>
@@ -259,8 +265,8 @@ const Film: React.FC<Film> = ({ data }) => {
 									)}
 								</Grid.Col>
 							</>
-						)
-					)}
+						);
+					})}
 				</ContentGrid>
 			)}
 		</>
