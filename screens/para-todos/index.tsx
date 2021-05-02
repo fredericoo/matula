@@ -8,7 +8,15 @@ import { Document } from "prismic-javascript/types/documents";
 import Button from "app/components/Button";
 import { hrefResolver } from "app/prismic-config";
 import Picture from "app/components/Picture";
-import { PageHeading, StyledGrid, ProjectHeading } from "./styles";
+import {
+	PageHeading,
+	StyledGrid,
+	ProjectHeading,
+	Content,
+	ProjectContent,
+	ProjectBody,
+	ProjectLi,
+} from "./styles";
 
 const ParaTodos: React.FC<Screen> = ({ data }) => {
 	return (
@@ -20,9 +28,9 @@ const ParaTodos: React.FC<Screen> = ({ data }) => {
 					</PageHeading>
 				)}
 				{data.donation_text && (
-					<BodyText>
+					<Content>
 						<Text content={data.donation_text} />
-					</BodyText>
+					</Content>
 				)}
 			</Grid.Col>
 
@@ -54,31 +62,37 @@ type ProjectProps = {
 };
 const Project: React.FC<ProjectProps> = ({ title, text, link, image }) => {
 	return (
-		<li>
-			{title && (
-				<ProjectHeading>
-					<Text content={title} asText />
-				</ProjectHeading>
-			)}
-			{text && (
-				<BodyText>
-					<Text content={text} />
-				</BodyText>
-			)}
-			{link.label && link.link && (
-				<Button href={hrefResolver(link.link)} target="_blank">
-					{link.label}
-				</Button>
-			)}
-			{image.url && (
-				<Picture
-					src={image.url}
-					width={image.dimensions.width}
-					height={image.dimensions.height}
-					alt={image.alt}
-				/>
-			)}
-		</li>
+		<ProjectLi>
+			<Grid sm="2" md="3">
+				<ProjectContent sm="span 2">
+					{title && (
+						<ProjectHeading>
+							<Text content={title} asText />
+						</ProjectHeading>
+					)}
+					{text && (
+						<ProjectBody>
+							<Text content={text} />
+						</ProjectBody>
+					)}
+					{link.label && link.link && (
+						<Button href={hrefResolver(link.link)} target="_blank">
+							{link.label}
+						</Button>
+					)}
+				</ProjectContent>
+				<Grid.Col sm="span 1">
+					{image.url && (
+						<Picture
+							src={image.url}
+							width={image.dimensions.width}
+							height={image.dimensions.height}
+							alt={image.alt}
+						/>
+					)}
+				</Grid.Col>
+			</Grid>
+		</ProjectLi>
 	);
 };
 

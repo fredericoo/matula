@@ -7,6 +7,10 @@ export const FooterBody = styled(BodyText)`
 	flex-wrap: wrap;
 	li {
 		margin-right: 1rem;
+		margin-bottom: 0;
+		&:not(:last-child) {
+			margin-bottom: 0.5rem;
+		}
 		p {
 			margin: 0;
 			font-size: ${constants.typography.size.small};
