@@ -69,7 +69,7 @@ const Programacao: React.FC<Screen & Programacao> = ({ data, current }) => {
 							key={date.primary.session_day}
 							day={date.day}
 							items={date.items.filter(
-								({ row }) => !filter.length || row.data.type === filter
+								({ row }) => !filter.length || row.data?.type === filter
 							)}
 						/>
 					))}
