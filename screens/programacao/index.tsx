@@ -1,7 +1,7 @@
 import { Screen } from "app/pages/[type]";
 import moment from "moment";
 import Session from "./Session";
-import { useState, useMemo } from "react";
+import { useState, useMemo, useRef, useEffect } from "react";
 import Filters from "./Filters";
 import { NavCol, Sessions, StyledGrid, ContentCol, Stories } from "./styles";
 import { Document } from "prismic-javascript/types/documents";
@@ -26,6 +26,13 @@ const contentFromType = (type: string) => {
 
 const Programacao: React.FC<Screen & Programacao> = ({ data, current }) => {
 	const [filter, setFilter] = useState("");
+	const contentRef = useRef<HTMLDivElement>();
+
+	useEffect(() => {
+		if (contentRef.current) {
+			contentRef.current.scrollTop = 0;
+		}
+	}, [current]);
 
 	const dates: DaySlice[] = useMemo(
 		() =>
@@ -80,7 +87,7 @@ const Programacao: React.FC<Screen & Programacao> = ({ data, current }) => {
 					</Link>
 				</Stories>
 			</NavCol>
-			<ContentCol md="col-4 / grid-end">
+			<ContentCol ref={contentRef} md="col-4 / grid-end">
 				{Current ? (
 					<Current key={current.uid} data={current.data} />
 				) : (
