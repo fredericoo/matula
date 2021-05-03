@@ -6,6 +6,7 @@ import constants from "theme/constants";
 import SEO from "app/components/SEO";
 import Text from "app/components/Text";
 import View from "app/components/View";
+import { RichText } from "prismic-reactjs";
 
 const HomeGrid = styled(Grid)`
 	height: 100%;
@@ -76,7 +77,16 @@ export default function Home({ doc }) {
 	if (!doc) return null;
 	return (
 		<HomeGrid sm="10">
-			<SEO />
+			<SEO
+				title={
+					doc.data.seo_title ||
+					(doc.data.title && Array.isArray(doc.data.title))
+						? RichText.asText(doc.data.title)
+						: doc.data.title
+				}
+				description={doc.data.seo_desc}
+				image={doc.data.seo_img?.url}
+			/>
 			<Grid.Col xl={{ col: "col-5 / grid-end", align: "center" }}>
 				{doc.data.teaser.html && (
 					<VideoEmbed
