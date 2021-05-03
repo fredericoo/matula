@@ -3,7 +3,7 @@ import Grid from "app/components/Grid";
 import constants from "app/theme/constants";
 
 export const StyledGrid = styled(Grid)`
-	padding: 2rem;
+	padding: 1rem;
 `;
 
 export const Title = styled.h1`

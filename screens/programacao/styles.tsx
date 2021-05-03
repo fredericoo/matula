@@ -27,8 +27,8 @@ export const NavCol = styled(Grid.Col)<NavCol>`
 `;
 
 export const ContentCol = styled(Grid.Col)`
-	padding-left: 2rem;
-	padding-right: 2rem;
+	padding-left: 1rem;
+	padding-right: 1rem;
 	height: 100%;
 	overflow-y: scroll;
 	${hideScrollbars}

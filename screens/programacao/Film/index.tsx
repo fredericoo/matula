@@ -35,7 +35,6 @@ type Film = {
 const Film: React.FC<Film> = ({ data }) => {
 	const now = useCurrentTime();
 	const tillStart = moment.duration(moment(data.start).diff(now));
-	const duration = moment.duration(moment(data.start).diff(data.end));
 	const tillEnd = moment.duration(moment(data.end).diff(now));
 
 	const isAvailable = tillStart.asSeconds() <= 0 && tillEnd.asSeconds() >= 0;
@@ -174,7 +173,7 @@ const Film: React.FC<Film> = ({ data }) => {
 							<Button
 								size="sm"
 								onClick={() => {
-									alert("pew");
+									// play film
 								}}
 								disabled={!isAvailable}
 							>

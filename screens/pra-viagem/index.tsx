@@ -8,37 +8,47 @@ import { Document } from "prismic-javascript/types/documents";
 import Button from "app/components/Button";
 import { hrefResolver } from "app/prismic-config";
 import Picture from "app/components/Picture";
+import {
+	StyledGrid,
+	PageHeading,
+	Content,
+	ProductWrapper,
+	ProductTitle,
+	ProductLogo,
+} from "./styles";
 
 const PraViagem: React.FC<Screen> = ({ data }) => {
 	return (
-		<Grid sm="10">
+		<StyledGrid sm="10">
 			<Grid.Col>
 				{data.page_title && (
-					<h1>
+					<PageHeading>
 						<Text content={data.page_title} asText />
-					</h1>
+					</PageHeading>
 				)}
 				{data.page_text && (
-					<BodyText>
+					<Content>
 						<Text content={data.page_text} />
-					</BodyText>
+					</Content>
 				)}
 			</Grid.Col>
 
-			<Grid.Col as="ul">
-				{groupHasItems(data.product) &&
-					data.product.map((entry, key) => (
-						<Product
-							key={key}
-							title={entry.product_name}
-							text={entry.product_desc}
-							link={{ label: entry.product_cta, link: entry.product_url }}
-							image={entry.product_img}
-							logo={entry.producer_logo}
-						/>
-					))}
+			<Grid.Col>
+				<Grid lg="3">
+					{groupHasItems(data.product) &&
+						data.product.map((entry, key) => (
+							<Product
+								key={key}
+								title={entry.product_name}
+								text={entry.product_desc}
+								link={{ label: entry.product_cta, link: entry.product_url }}
+								image={entry.product_img}
+								logo={entry.producer_logo}
+							/>
+						))}
+				</Grid>
 			</Grid.Col>
-		</Grid>
+		</StyledGrid>
 	);
 };
 
@@ -63,11 +73,33 @@ const Product: React.FC<ProductProps> = ({
 	logo,
 }) => {
 	return (
-		<li>
+		<ProductWrapper>
+			{logo.url && (
+				<ProductLogo>
+					<Picture
+						src={logo.url}
+						width={200}
+						height={200}
+						objectFit="contain"
+						objectPosition="center right"
+						alt={logo.alt}
+					/>
+				</ProductLogo>
+			)}
+			{image.url && (
+				<Picture
+					src={image.url}
+					width={1080}
+					height={1080}
+					alt={image.alt}
+					objectFit="cover"
+				/>
+			)}
+
 			{title && (
-				<h2>
+				<ProductTitle>
 					<Text content={title} asText />
-				</h2>
+				</ProductTitle>
 			)}
 			{text && (
 				<BodyText>
@@ -79,23 +111,7 @@ const Product: React.FC<ProductProps> = ({
 					{link.label}
 				</Button>
 			)}
-			{image.url && (
-				<Picture
-					src={image.url}
-					width={image.dimensions.width}
-					height={image.dimensions.height}
-					alt={image.alt}
-				/>
-			)}
-			{logo.url && (
-				<Picture
-					src={logo.url}
-					width={logo.dimensions.width}
-					height={logo.dimensions.height}
-					alt={logo.alt}
-				/>
-			)}
-		</li>
+		</ProductWrapper>
 	);
 };
 

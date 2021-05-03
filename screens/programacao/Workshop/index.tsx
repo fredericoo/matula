@@ -15,6 +15,9 @@ import {
 } from "./styles";
 import moment from "moment";
 import SEO from "app/components/SEO";
+import useCurrentTime from "app/utils/hooks/useCurrentTime";
+import { groupHasItems } from "app/utils/prismic";
+import { RestaurantItem, Biome, Links, ChefTitle } from "../Film/styles";
 
 type Workshop = {
 	data: any;
@@ -34,6 +37,12 @@ export type Author = {
 };
 
 const Workshop: React.FC<Workshop> = ({ data }) => {
+	const now = useCurrentTime();
+	const tillStart = moment.duration(moment(data.start).diff(now));
+	const tillEnd = moment.duration(moment(data.end).diff(now));
+
+	const isAvailable = tillStart.asSeconds() <= 0;
+
 	return (
 		<WrapperGrid lg={{ gap: "2rem", cols: 7 }}>
 			<SEO
@@ -45,7 +54,7 @@ const Workshop: React.FC<Workshop> = ({ data }) => {
 				description={data.seo_desc}
 				image={data.seo_img?.url}
 			/>
-			{data.embed?.html && (
+			{isAvailable && data.embed?.html && (
 				<Grid.Col>
 					<VideoEmbed dangerouslySetInnerHTML={{ __html: data.embed.html }} />
 				</Grid.Col>
@@ -110,6 +119,57 @@ const Workshop: React.FC<Workshop> = ({ data }) => {
 						</RightCol>
 					</>
 				))}
+
+			{groupHasItems(data.chef) && (
+				<>
+					<Grid.Col>
+						<ChefTitle>Sugestão do chef</ChefTitle>
+					</Grid.Col>
+					{data.chef.map((entry) => {
+						if (!entry.chef_item?.data) return null;
+						const {
+							photo: image,
+							s_restaurant: restaurant,
+							s_title: title,
+							s_short: short,
+							s_bioma: biome,
+							s_link: links,
+						} = entry.chef_item.data;
+
+						return (
+							<>
+								<RestaurantItem>
+									<h3>
+										<Text content={title} asText />
+										<Biome>{biome}</Biome>
+									</h3>
+									<h4>
+										<Text content={restaurant} asText />
+									</h4>
+								</RestaurantItem>
+								<Grid.Col lg="grid-start / col-4">
+									<BodyText>
+										<Text content={short} />
+									</BodyText>
+
+									<Links>
+										<Text content={links} />
+									</Links>
+								</Grid.Col>
+								<Grid.Col lg="col-4 / grid-end">
+									{image?.url && (
+										<Picture
+											src={image.url}
+											width={image.dimensions.width}
+											height={image.dimensions.height}
+										/>
+									)}
+								</Grid.Col>
+							</>
+						);
+					})}
+				</>
+			)}
 		</WrapperGrid>
 	);
 };
