@@ -33,7 +33,7 @@ interface ListItem {
 
 export const StyledLi = styled(motion.li)<ListItem>`
 	margin: 0;
-	flex: 1 0 0px;
+	flex: 1 1 0px;
 	text-align: center;
 	z-index: 2;
 	font-family: ${constants.typography.font.headings};

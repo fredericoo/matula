@@ -207,7 +207,7 @@ const Film: React.FC<Film> = ({ data }) => {
 				</HeaderContent>
 			</Header>
 			<ContentGrid sm="7">
-				<Grid.Col lg="grid-start / col-4">
+				<Grid.Col sm="grid-start / col-3" lg="grid-start / col-4">
 					{data.cover?.url && (
 						<Picture
 							src={data.cover.url}
@@ -217,14 +217,14 @@ const Film: React.FC<Film> = ({ data }) => {
 						/>
 					)}
 				</Grid.Col>
-				<Grid.Col lg="col-4 / grid-end">
+				<Grid.Col sm="col-3 / grid-end" lg="col-4 / grid-end">
 					<Label as="h2">Sinopse</Label>
 					<BodyText>
 						<Text content={data.short} />
 					</BodyText>
 				</Grid.Col>
 			</ContentGrid>
-			{groupHasItems(data.chef) && (
+			{groupHasItems(data.chef) && data.chef[0]?.chef_item?.data?.s_title && (
 				<ContentGrid sm="7">
 					<Grid.Col>
 						<ChefTitle>Sugestão do chef</ChefTitle>

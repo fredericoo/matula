@@ -33,21 +33,17 @@ const PraViagem: React.FC<Screen> = ({ data }) => {
 				)}
 			</Grid.Col>
 
-			<Grid.Col>
-				<Grid lg="3">
-					{groupHasItems(data.product) &&
-						data.product.map((entry, key) => (
-							<Product
-								key={key}
-								title={entry.product_name}
-								text={entry.product_desc}
-								link={{ label: entry.product_cta, link: entry.product_url }}
-								image={entry.product_img}
-								logo={entry.producer_logo}
-							/>
-						))}
-				</Grid>
-			</Grid.Col>
+			{groupHasItems(data.product) &&
+				data.product.map((entry, key) => (
+					<Product
+						key={key}
+						title={entry.product_name}
+						text={entry.product_desc}
+						link={{ label: entry.product_cta, link: entry.product_url }}
+						image={entry.product_img}
+						logo={entry.producer_logo}
+					/>
+				))}
 		</StyledGrid>
 	);
 };
@@ -73,7 +69,7 @@ const Product: React.FC<ProductProps> = ({
 	logo,
 }) => {
 	return (
-		<ProductWrapper>
+		<ProductWrapper lg="span 3">
 			{logo.url && (
 				<ProductLogo>
 					<Picture

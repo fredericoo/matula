@@ -120,7 +120,7 @@ const Workshop: React.FC<Workshop> = ({ data }) => {
 					</>
 				))}
 
-			{groupHasItems(data.chef) && (
+			{groupHasItems(data.chef) && data.chef[0]?.chef_item?.data?.s_title && (
 				<>
 					<Grid.Col>
 						<ChefTitle>Sugestão do chef</ChefTitle>

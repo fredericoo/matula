@@ -27,7 +27,7 @@ export const Content = styled(BodyText)`
 	}
 `;
 
-export const ProductWrapper = styled.div`
+export const ProductWrapper = styled(Grid.Col)`
 	color: ${({ theme }) => theme.color.primary};
 	position: relative;
 `;

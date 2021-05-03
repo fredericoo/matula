@@ -5,12 +5,14 @@ import View from "app/components/View";
 import { hatchBackground } from "app/theme/effects";
 
 export const Header = styled.header`
-	width: calc(100% + 4rem);
-	transform: translateX(-2rem);
-	height: 0px;
+	width: calc(100% + 2rem);
+	transform: translateX(-1rem);
 	position: relative;
-	padding-bottom: calc((100% + 4rem) * 0.5625);
-	min-height: calc((100% + 4rem) * 0.5625);
+	height: 60vh;
+	@media (${constants.metrics.breakpoints.lg}) {
+		padding-bottom: calc((100% + 2rem) * 0.5625);
+		height: 0;
+	}
 	background: black;
 	color: ${({ theme }) => theme.color.background};
 	text-align: center;

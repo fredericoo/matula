@@ -30,8 +30,10 @@ export const ContentCol = styled(Grid.Col)`
 	padding-left: 1rem;
 	padding-right: 1rem;
 	height: 100%;
-	overflow-y: scroll;
-	${hideScrollbars}
+	@media (${constants.metrics.breakpoints.lg}) {
+		overflow-y: scroll;
+		${hideScrollbars}
+	}
 `;
 
 export const Sessions = styled.ul`

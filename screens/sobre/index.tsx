@@ -16,6 +16,7 @@ const Sobre: React.FC<Screen> = ({ data }) => {
 						</Title>
 					)}
 				</Grid.Col>
+
 				<Grid.Col lg="col-3 / col-8">
 					{data.content1 && (
 						<BodyText>
@@ -38,6 +39,7 @@ const Sobre: React.FC<Screen> = ({ data }) => {
 						/>
 					)}
 				</Grid.Col>
+
 				<Grid.Col>
 					{data.title2 && (
 						<Title as="h2">
@@ -67,7 +69,7 @@ const Sobre: React.FC<Screen> = ({ data }) => {
 						</BodyText>
 					)}
 				</Grid.Col>
-				<Grid.Col lg={{ col: "col-9 / grid-end", align: "end" }}>
+				<Grid.Col sm="span 3" lg={{ col: "col-9 / grid-end", align: "end" }}>
 					{data.icon1?.url && (
 						<Picture
 							src={data.icon1.url}
@@ -80,7 +82,10 @@ const Sobre: React.FC<Screen> = ({ data }) => {
 				</Grid.Col>
 			</StyledGrid>
 			<StyledGrid sm={{ cols: 10, gap: "2rem" }}>
-				<Grid.Col lg={{ col: "grid-start / col-10", row: 1 }}>
+				<Grid.Col
+					sm={{ col: "grid-start / grid-end", row: 1 }}
+					lg={{ col: "grid-start / col-10", row: 1 }}
+				>
 					{data.deco3?.url && (
 						<Picture
 							src={data.deco3.url}
@@ -95,7 +100,10 @@ const Sobre: React.FC<Screen> = ({ data }) => {
 						/>
 					)}
 				</Grid.Col>
-				<DecoCol lg={{ col: "col-9 / grid-end", row: 1, align: "end" }}>
+				<DecoCol
+					sm={{ col: "span 4 / grid-end", row: 1, align: "end" }}
+					lg={{ col: "col-9 / grid-end", row: 1, align: "end" }}
+				>
 					{data.icon2?.url && (
 						<Picture
 							src={data.icon2.url}
@@ -115,7 +123,7 @@ const Sobre: React.FC<Screen> = ({ data }) => {
 						</Title>
 					)}
 				</Grid.Col>
-				<Grid.Col lg={{ col: "grid-start / col-3", align: "end" }}>
+				<Grid.Col sm="span 4" lg={{ col: "grid-start / col-3", align: "end" }}>
 					{data.icon3?.url && (
 						<Picture
 							src={data.icon3.url}
