@@ -1,154 +1,140 @@
-import { useState, useEffect } from "react";
-import moment, { Duration } from "moment";
-import styled from "styled-components";
-
-import Head from "next/head";
 import Grid from "components/Grid";
-import Image from "next/image";
+import styled from "styled-components";
+import { Client } from "utils/prismic";
+import BodyText from "components/BodyText";
+import constants from "theme/constants";
+import SEO from "app/components/SEO";
+import Text from "app/components/Text";
+import View from "app/components/View";
+import { RichText } from "prismic-reactjs";
 
-export default function Home() {
-	const [timer, setTimer] = useState<Duration>();
+const HomeGrid = styled(Grid)`
+	height: 100%;
+	padding: 1rem;
+`;
 
-	useEffect(() => {
-		const interval = setInterval(() => {
-			setTimer(
-				moment.duration(moment("2021-05-13", "YYYY-MM-DD").diff(moment()))
-			);
-		}, 1000);
-		return () => {
-			clearInterval(interval);
-		};
-	}, []);
+const HeaderCol = styled(Grid.Col)`
+	height: 100%;
+`;
 
+const HeaderView = styled(View)`
+	height: 100%;
+`;
+
+const HeaderTitle = styled.h1`
+	color: ${({ theme }) => theme.color.primary};
+	font-family: ${constants.typography.font.headings};
+	font-weight: ${constants.typography.weight.regular};
+	text-transform: uppercase;
+`;
+const HeaderBody = styled(BodyText)`
+	color: ${({ theme }) => theme.color.secondary};
+	padding-bottom: 2rem;
+`;
+
+const DatesTitle = styled.h2`
+	font-size: ${constants.typography.size.large};
+	font-family: ${constants.typography.font.headings};
+	font-weight: ${constants.typography.weight.regular};
+	text-transform: uppercase;
+	margin-bottom: 1rem;
+	color: ${({ theme }) => theme.color.primary};
+	strong {
+		font-size: ${constants.typography.size.display};
+		color: ${({ theme }) => theme.color.secondary};
+		font-family: ${constants.typography.font.decoration};
+		display: inline-block;
+		&:nth-child(1) {
+			transform: rotate(-6deg);
+		}
+		&:nth-child(2) {
+			transform: rotate(3deg);
+		}
+		&:nth-child(3) {
+			transform: rotate(-5deg);
+		}
+		&:nth-child(4) {
+			transform: rotate(8deg);
+		}
+	}
+`;
+
+const VideoEmbed = styled.div`
+	width: 100%;
+	height: 0px;
+	position: relative;
+	padding-bottom: 56.18%;
+	& > * {
+		position: absolute;
+		height: 100%;
+		width: 100%;
+		top: 0;
+		left: 0;
+	}
+`;
+
+export default function Home({ doc }) {
+	if (!doc) return null;
 	return (
-		<StyledPage>
-			<Head>
-				<title>Matula Film Festival</title>
-				<meta property="og:title" content="Matula Film Festival" />
-				<meta
-					property="og:description"
-					content="Festival gratuito e online de filmes e gastronomia."
-				/>
-
-				<link rel="icon" href="/favicon.svg" />
-				<link rel="mask-icon" href="/favicon.svg" color="#000000" />
-				<meta name="msapplication-TileImage" content="/favicon.png" />
-				<link rel="apple-touch-icon" href="/favicon.png" sizes="512x512" />
-				<link rel="icon" href="/favicon.png" sizes="512x512" />
-			</Head>
-			<Grid>
-				<Grid.Col
-					sm={{ row: "1", z: 1 }}
-					md="col-2 / col-12"
-					lg="col-4 / col-10"
-					style={{ position: "relative" }}
-				>
-					<Tape top="2%" right="-2%" rotate={-5}>
-						<Image
-							src="/img/tape.png"
-							width={167}
-							height={512}
-							layout="responsive"
-						/>
-					</Tape>
-					<Tape left="4%" top="-2%" rotate={42}>
-						<Image
-							src="/img/tape.png"
-							width={167}
-							height={512}
-							layout="responsive"
-						/>
-					</Tape>
-					<Tape left="45%" bottom="-2%" rotate={89}>
-						<Image
-							src="/img/tape.png"
-							width={167}
-							height={512}
-							layout="responsive"
-						/>
-					</Tape>
-					<Image
-						src="/img/poster.png"
-						width="1200"
-						height="1683"
-						layout="responsive"
+		<HomeGrid sm="10">
+			<SEO
+				title={
+					doc.data.seo_title ||
+					(doc.data.title && Array.isArray(doc.data.title))
+						? RichText.asText(doc.data.title)
+						: doc.data.title
+				}
+				description={doc.data.seo_desc}
+				image={doc.data.seo_img?.url}
+			/>
+			<Grid.Col xl={{ col: "col-5 / grid-end", align: "center" }}>
+				{doc.data.teaser.html && (
+					<VideoEmbed
+						dangerouslySetInnerHTML={{ __html: doc.data.teaser.html }}
 					/>
-				</Grid.Col>
-				<Grid.Col
-					sm={{ row: "1", z: 2, align: "end" }}
-					md="col-2 / col-12"
-					lg="col-4 / col-10"
+				)}
+			</Grid.Col>
+			<HeaderCol
+				sm="grid-start / grid-end"
+				xl={{ col: "grid-start / col-4", row: 1, align: "end" }}
+			>
+				<HeaderView
+					sm={{ direction: "column", justify: "space-between", gap: "2rem" }}
 				>
-					{timer && (
-						<Timer>
-							<h4 className="ff-headings">Faltam</h4>
-							{!!timer.asDays() ? (
-								<span>
-									{Math.floor(timer.asDays())} dia
-									{timer.asDays() > 1 ? "s" : ""}
-								</span>
-							) : (
-								<span>
-									{String(timer.hours()).padStart(2, "0")}:
-									{String(timer.minutes()).padStart(2, "0")}:
-									{String(timer.seconds()).padStart(2, "0")}
-								</span>
-							)}
-							<figcaption className="ff-headings sobre">
-								FESTIVAL ONLINE & GRATUITO
-							</figcaption>
-						</Timer>
-					)}
-				</Grid.Col>
-			</Grid>
-		</StyledPage>
+					<aside>
+						<DatesTitle>
+							<Text content={doc.data.dates} />
+						</DatesTitle>
+						<BodyText>
+							<Text content={doc.data.dates_about} />
+						</BodyText>
+					</aside>
+
+					<header>
+						<HeaderTitle>
+							<Text asText content={doc.data.title} />
+						</HeaderTitle>
+						<HeaderBody>
+							<Text content={doc.data.desc} />
+						</HeaderBody>
+					</header>
+				</HeaderView>
+			</HeaderCol>
+		</HomeGrid>
 	);
 }
 
-interface TapeProps {
-	left?: string;
-	top?: string;
-	bottom?: string;
-	right?: string;
-	rotate?: number;
+export async function getStaticProps({ locale }) {
+	const client = Client();
+	const doc = await client.getSingle("home", { lang: locale });
+
+	if (doc) {
+		return {
+			revalidate: 600,
+			props: {
+				doc: doc || {},
+			},
+		};
+	}
+	return { revalidate: 60, props: { doc: {} } };
 }
-
-const Tape = styled.div`
-	position: absolute;
-	z-index: 2;
-	left: ${({ left }: TapeProps) => left};
-	top: ${({ top }: TapeProps) => top};
-	bottom: ${({ bottom }: TapeProps) => bottom};
-	right: ${({ right }: TapeProps) => right};
-	transform: ${({ rotate }: TapeProps) => `rotate(${rotate}deg)`};
-	width: 5%;
-	height: 5%;
-`;
-
-const StyledPage = styled.main`
-	padding-top: 2rem;
-	padding-bottom: 2rem;
-	min-height: 100vh;
-	background: var(--colour__green);
-	display: flex;
-	justify-content: center;
-	align-items: center;
-`;
-
-const Timer = styled.div`
-	mix-blend-mode: multiply;
-	padding: 7%;
-	text-align: center;
-	color: var(--colour__blue);
-	font-size: calc(1.2rem + 2vw);
-	h4 {
-		color: var(--colour__accent);
-		text-transform: uppercase;
-		font-size: 0.4em;
-	}
-	figcaption {
-		color: var(--colour__accent);
-		text-transform: uppercase;
-		font-size: 1rem;
-	}
-`;

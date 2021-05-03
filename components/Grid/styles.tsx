@@ -1,85 +1,94 @@
-import styled from "styled-components";
-import { GridProps, ColProps } from "./types";
-import { breakpoints, metrics } from "./constants";
+import styled, { css, FlattenSimpleInterpolation } from "styled-components";
+import { GridProps, ColProps, Breakpoint } from "./types";
+import constants from "app/theme/constants";
 
-export const StyledGrid = styled.section`
-	width: 100%;
-	display: grid;
-	--gap: ${({ sm }: GridProps): string =>
-		typeof sm === "string" ? sm : sm.gap};
-	${(props) =>
-		Object.entries(breakpoints).map(
-			([point, size]) =>
-				props[point] &&
-				`@media (${size}) { --gap: ${
-					typeof props[point] === "string" ? props[point] : props[point].gap
-				};}`
-		)}
-	--sidebearing: calc((100vw - ${metrics.containerWidth}) / 2);
-	gap: var(--gap);
-	grid-template-columns:
-		[screen-start]
-		var(--sidebearing)
-		[grid-start col-1] 1fr [col-2] 1fr [col-3] 1fr [col-4] 1fr [col-5] 1fr [col-6] 1fr [col-7] 1fr [col-8] 1fr [col-9] 1fr [col-10] 1fr [col-11] 1fr [col-12] 1fr [grid-end]
-		var(--sidebearing)
-		[screen-end];
-`;
+const breakpoints: Breakpoint[] = ["sm", "md", "lg", "xl"];
 
-export const StyledCol = styled.div`
-	${({ sm }: ColProps): string =>
-		`--col: ${typeof sm === "string" ? sm : sm.col || "grid-start / grid-end"}; 
-        --row: ${(typeof sm === "object" && sm.row) || "auto"}; 
-        --zIndex: ${(typeof sm === "object" && sm.z) || "auto"}; 
-        --alignSelf: ${(typeof sm === "object" && sm.align) || "auto"}; 
-        --justifySelf: ${(typeof sm === "object" && sm.justify) || "auto"}`};
+const wrapInBreakpoint = (
+	style: FlattenSimpleInterpolation,
+	breakpoint: Breakpoint
+): FlattenSimpleInterpolation => {
+	if (breakpoint === "sm") return style;
+	return css`
+		@media (${constants.metrics.breakpoints[breakpoint]}) {
+			${style}
+		} ;
+	`;
+};
+
+const colsToGrid = (cols: number, main: boolean) => {
+	return css`
+		grid-template-columns:
+			${main ? "[screen-start] var(--sidebearing)" : ""}
+			[grid-start col-1] 1fr ${new Array(cols - 1)
+				.fill("")
+				.map((_, index) => `[col-${index + 2}] 1fr`)
+				.join(" ")} [grid-end]
+			${main ? "var(--sidebearing) [screen-end]" : ""};
+	`;
+};
+
+export const StyledCol = styled.div<ColProps>`
 	${(props) =>
-		Object.entries(breakpoints).map(
-			([point, size]) =>
-				props[point] &&
-				`@media (${size}) { 
-                    ${
-											props[point] &&
-											`--col: ${
-												(typeof props[point] === "string"
-													? props[point]
-													: props[point].col) || "inherit"
-											};`
-										}
-                    ${
-											props[point]?.row &&
-											`--row: ${
-												(typeof props[point] === "object" &&
-													props[point].row) ||
-												"inherit"
-											};`
-										}
-                    ${
-											props[point]?.z &&
-											`--zIndex: ${
-												(typeof props[point] === "object" && props[point].z) ||
-												"inherit"
-											};`
-										} 
-                    ${
-											props[point]?.align &&
-											`--alignSelf: ${
-												(typeof props[point] === "object" &&
-													props[point].align) ||
-												"inherit"
-											};`
-										} 
-                    ${
-											props[point]?.justify &&
-											`--justifySelf: ${
-												(typeof props[point] === "object" &&
-													props[point].justify) ||
-												"inherit"
-											}`
-										} }`
-		)}
+		breakpoints.map((key) => {
+			const config = props[key];
+			if (!config) return "";
+			if (typeof config === "string") {
+				return wrapInBreakpoint(
+					css`
+						--col: ${config};
+					`,
+					key
+				);
+			}
+			return wrapInBreakpoint(
+				css`
+					${config.col ? `--col: ${config.col};` : ""}
+					${config.row
+						? `--row: ${config.row};`
+						: ""}
+                    ${config.z
+						? `--zIndex: ${config.z};`
+						: ""} 
+                    ${config.align
+						? `--alignSelf: ${config.align};`
+						: ""} 
+                    ${config.justify
+						? `--justifySelf: ${config.justify}`
+						: ""}
+				`,
+				key
+			);
+		})}
 	grid-column: var(--col);
 	grid-row: var(--row);
 	align-self: var(--alignSelf);
 	justify-self: var(--justifySelf);
 	z-index: var(--zIndex);
+	max-width: 100%;
 `;
+StyledCol.defaultProps = { sm: { col: "grid-start / grid-end" } };
+
+export const StyledGrid = styled.section<GridProps>`
+	width: 100%;
+	display: grid;
+	--gap: 2rem;
+	--sidebearing: calc((100vw - ${constants.metrics.containerWidth}) / 2);
+	${(props) =>
+		breakpoints.map((key) => {
+			const config = props[key];
+			if (!config) return "";
+			if (typeof config === "string") {
+				return colsToGrid(+config, false);
+			}
+			return wrapInBreakpoint(
+				css`
+					--gap: ${config?.gap};
+					${colsToGrid(+config.cols, config.main || false)}
+				`,
+				key
+			);
+		})}
+	gap: min(4vw,var(--gap));
+`;
+StyledGrid.defaultProps = { sm: { gap: "2rem", cols: 12 } };

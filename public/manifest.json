@@ -1,0 +1,16 @@
+{
+	"name": "Matula",
+	"short_name": "Matula",
+	"icons": [
+		{
+			"src": "/img/matula-web-app.png",
+			"sizes": "512x512",
+			"type": "image/png",
+			"purpose": "any maskable"
+		}
+	],
+	"start_url": "https://matula.vercel.app",
+	"background_color": "#f8efe5",
+	"theme_color": "#4c3688",
+	"display": "fullscreen"
+}
