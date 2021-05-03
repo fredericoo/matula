@@ -206,3 +206,20 @@ export const Links = styled.div`
 		}
 	}
 `;
+
+export const VideoEmbed = styled.div`
+	width: 100%;
+	height: 100%;
+	/* width: calc(100% + 4rem); */
+	/* transform: translateX(-2rem); */
+	/* height: 0px; */
+	/* position: relative; */
+	/* padding-bottom: 56.18%; */
+	& > * {
+		position: absolute;
+		height: 100%;
+		width: 100%;
+		top: 0;
+		left: 0;
+	}
+`;

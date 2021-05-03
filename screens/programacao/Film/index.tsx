@@ -16,6 +16,7 @@ import {
 	RestaurantItem,
 	Biome,
 	Links,
+	VideoEmbed,
 } from "./styles";
 import Button from "app/components/Button";
 import moment from "moment";
@@ -42,11 +43,11 @@ const Film: React.FC<Film> = ({ data }) => {
 	const isVideo =
 		data.trailer.url && data.trailer.url.match(/\.(mp4|mov|webm)$/);
 	const videoRef = useRef<HTMLVideoElement>();
-	const [playing, setPlaying] = useState(false);
+	const [playing, setPlaying] = useState("");
 	const [videoProgress, setVideoProgress] = useState(0);
 	useEffect(() => {
 		if (videoRef.current) {
-			playing
+			playing === "trailer"
 				? videoRef.current.play()
 				: (videoRef.current.pause(), (videoRef.current.currentTime = 0));
 		}
@@ -56,7 +57,7 @@ const Film: React.FC<Film> = ({ data }) => {
 		const interval = setInterval(() => {
 			if (videoRef.current) {
 				if (videoRef.current.currentTime === videoRef.current.duration) {
-					setPlaying(false);
+					setPlaying("");
 				}
 				setVideoProgress(
 					Math.round(
@@ -82,28 +83,35 @@ const Film: React.FC<Film> = ({ data }) => {
 				image={data.seo_img?.url}
 			/>
 			<Header>
+				{playing === "film" && data.embed.html && (
+					<VideoEmbed dangerouslySetInnerHTML={{ __html: data.embed.html }} />
+				)}
 				{isVideo ? (
 					<>
 						<Video
-							playing={playing}
+							playing={playing === "trailer"}
 							ref={videoRef}
 							playsInline
 							controls={false}
-							onClick={() => setPlaying(!playing)}
+							onClick={() => setPlaying("")}
 						>
 							<source
 								src={data.trailer.url}
 								type={`video/${data.trailer.url.match(/\.([^.]+)$/)[1]}`}
 							/>
 						</Video>
-						<ProgressBar playing={playing} max="100" value={videoProgress} />
+						<ProgressBar
+							playing={playing === "trailer"}
+							max="100"
+							value={videoProgress}
+						/>
 					</>
 				) : (
 					<PreviewWrapper>
 						<Picture src={data.trailer.url} layout="fill" objectFit="cover" />
 					</PreviewWrapper>
 				)}
-				<HeaderContent playing={playing}>
+				<HeaderContent playing={!!playing}>
 					<div>
 						<Title>
 							<Text content={data.title} asText />
@@ -150,7 +158,7 @@ const Film: React.FC<Film> = ({ data }) => {
 					<Actions sm={{ justify: "center", gap: "2rem" }}>
 						{isVideo && (
 							<View sm={{ inline: true, direction: "column" }}>
-								<PlayButton onClick={() => setPlaying(!playing)}>
+								<PlayButton onClick={() => setPlaying("trailer")}>
 									<svg
 										xmlns="http://www.w3.org/2000/svg"
 										width="32"
@@ -173,7 +181,7 @@ const Film: React.FC<Film> = ({ data }) => {
 							<Button
 								size="sm"
 								onClick={() => {
-									// play film
+									setPlaying("film");
 								}}
 								disabled={!isAvailable}
 							>
