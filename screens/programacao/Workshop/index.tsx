@@ -54,10 +54,21 @@ const Workshop: React.FC<Workshop> = ({ data }) => {
 				description={data.seo_desc}
 				image={data.seo_img?.url}
 			/>
-			{isAvailable && data.embed?.html && (
+			{isAvailable && data.embed?.html ? (
 				<Grid.Col>
 					<VideoEmbed dangerouslySetInnerHTML={{ __html: data.embed.html }} />
 				</Grid.Col>
+			) : (
+				data?.img?.url && (
+					<Grid.Col>
+						<Picture
+							src={data.img.url}
+							width={1280}
+							height={720}
+							layout="responsive"
+						/>
+					</Grid.Col>
+				)
 			)}
 			<Grid.Col>
 				<Type>
