@@ -1,6 +1,6 @@
 import "../styles/globals.scss";
 import { AppProps } from "next/dist/next-server/lib/router/router";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import TBD from "components/TBD";
 import moment from "moment";
 import Frame from "components/Frame";
@@ -12,12 +12,25 @@ import Tools from "components/Tools";
 import Logo from "components/Logo";
 import { ConfigProvider } from "app/utils/hooks/useConfig";
 import { CurrentTimeProvider } from "app/utils/hooks/useCurrentTime";
+import { useRouter } from "next/router";
+import * as gtag from "../utils/gtag";
 
 function App({ Component, pageProps }: AppProps): JSX.Element {
 	const releaseDate = moment(); // moment("2021-05-13", "YYYY-MM-DD");
 	const alreadyReleased =
 		moment.duration(releaseDate.diff(moment())).asSeconds() <= 0;
 	const [released, setReleased] = useState(alreadyReleased);
+
+	const router = useRouter();
+	useEffect(() => {
+		const handleRouteChange = (url: URL) => {
+			gtag.pageview(url);
+		};
+		router.events.on("routeChangeComplete", handleRouteChange);
+		return () => {
+			router.events.off("routeChangeComplete", handleRouteChange);
+		};
+	}, [router.events]);
 
 	return (
 		<ThemeProvider theme={theme}>
