@@ -42,10 +42,14 @@ const Player: React.FC<Workshop> = ({ data }) => {
 
 	const isAvailable = tillStart.asSeconds() <= 0;
 
-	if (isAvailable && data.embed?.html)
+	if (isAvailable && (data.embed?.html || data.embed_code))
 		return (
 			<Grid.Col>
-				<VideoEmbed dangerouslySetInnerHTML={{ __html: data.embed.html }} />
+				<VideoEmbed
+					dangerouslySetInnerHTML={{
+						__html: data.embed.html || data.embed_code,
+					}}
+				/>
 			</Grid.Col>
 		);
 
@@ -93,7 +97,7 @@ const Workshop: React.FC<Workshop> = ({ data }) => {
 							<dt>Data</dt>
 							<dd>{moment(data.start).format("DD/MM")}</dd>
 							<dt>Horário</dt>
-							<dd>{moment(data.start).format("HH[h]mm").replace(/0+$/, "")}</dd>
+							<dd>{moment(data.start).format("HH[h]mm").replace(/00$/, "")}</dd>
 						</>
 					)}
 

@@ -61,6 +61,7 @@ type ProductProps = {
 	image: Image;
 	logo: Image;
 };
+
 const Product: React.FC<ProductProps> = ({
 	title,
 	text,

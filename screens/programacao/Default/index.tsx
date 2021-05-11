@@ -4,6 +4,8 @@ import Picture from "app/components/Picture";
 import Text from "app/components/Text";
 import BodyText from "app/components/BodyText";
 import { WrapperGrid, Intertitle } from "./styles";
+import React from "react";
+import { RichText } from "prismic-reactjs";
 
 type DefaultPage = { data: Document["data"] };
 
@@ -16,7 +18,7 @@ const Default: React.FC<DefaultPage> = ({ data }) => {
 					sections_title: title,
 					sections_content: content,
 				}) => (
-					<>
+					<React.Fragment key={RichText.asText(title)}>
 						<Grid.Col lg="grid-start / col-3">
 							{image.url && (
 								<Picture
@@ -35,7 +37,7 @@ const Default: React.FC<DefaultPage> = ({ data }) => {
 								<Text content={content} />
 							</BodyText>
 						</Grid.Col>
-					</>
+					</React.Fragment>
 				)
 			)}
 		</WrapperGrid>

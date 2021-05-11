@@ -51,7 +51,7 @@ export const Title = styled.h3`
 	font-weight: ${constants.typography.weight.regular};
 `;
 
-export const Subtitle = styled.p`
+export const Subtitle = styled.div`
 	font-family: ${constants.typography.font.body};
 	text-transform: none;
 `;
