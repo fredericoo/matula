@@ -12,6 +12,7 @@ import {
 	Professor,
 	Table,
 	VideoEmbed,
+	ThumbnailCol,
 } from "./styles";
 import moment from "moment";
 import SEO from "app/components/SEO";
@@ -56,12 +57,9 @@ const Player: React.FC<Workshop> = ({ data }) => {
 	if (data.img?.url)
 		return (
 			<Grid.Col>
-				<Picture
-					src={data.img.url}
-					width={1280}
-					height={720}
-					layout="responsive"
-				/>
+				<ThumbnailCol>
+					<Picture src={data.img.url} layout="fill" objectFit="cover" />
+				</ThumbnailCol>
 			</Grid.Col>
 		);
 

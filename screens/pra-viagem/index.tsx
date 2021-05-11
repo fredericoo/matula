@@ -15,36 +15,70 @@ import {
 	ProductWrapper,
 	ProductTitle,
 	ProductLogo,
+	ProductBody,
 } from "./styles";
+import { useMemo } from "react";
+import { DaySlice } from "../programacao/types";
+import moment from "moment";
+import { dateFormat } from "../programacao/constants";
+import Session from "./Session";
+import { ChefTitle } from "../programacao/Film/styles";
 
 const PraViagem: React.FC<Screen> = ({ data }) => {
-	return (
-		<StyledGrid sm="10">
-			<Grid.Col>
-				{data.page_title && (
-					<PageHeading>
-						<Text content={data.page_title} asText />
-					</PageHeading>
-				)}
-				{data.page_text && (
-					<Content>
-						<Text content={data.page_text} />
-					</Content>
-				)}
-			</Grid.Col>
+	const dates: DaySlice[] = useMemo(
+		() =>
+			data.body
+				.map((date: DaySlice) => ({
+					...date,
+					day: moment(date.primary.session_day, dateFormat),
+				}))
+				.sort((a: DaySlice, b: DaySlice) => {
+					if (a.primary.session_day === "invalid date") return 1;
+					a.day.diff(b.day);
+				}),
+		[data]
+	);
 
-			{groupHasItems(data.product) &&
-				data.product.map((entry, key) => (
-					<Product
-						key={key}
-						title={entry.product_name}
-						text={entry.product_desc}
-						link={{ label: entry.product_cta, link: entry.product_url }}
-						image={entry.product_img}
-						logo={entry.producer_logo}
-					/>
-				))}
-		</StyledGrid>
+	return (
+		<>
+			<StyledGrid sm="9">
+				<Grid.Col>
+					{data.page_title && (
+						<PageHeading>
+							<Text content={data.page_title} asText />
+						</PageHeading>
+					)}
+					{data.page_text && (
+						<Content>
+							<Text content={data.page_text} />
+						</Content>
+					)}
+				</Grid.Col>
+
+				{groupHasItems(data.product) &&
+					data.product.map((entry, key) => (
+						<Product
+							key={key}
+							title={entry.product_name}
+							text={entry.product_desc}
+							link={{ label: entry.product_cta, link: entry.product_url }}
+							image={entry.product_img}
+							logo={entry.producer_logo}
+						/>
+					))}
+			</StyledGrid>
+
+			<ChefTitle>Sugestões do chef</ChefTitle>
+
+			{dates.map((date) => (
+				<Session
+					title={date.primary.session_title}
+					key={date.primary.session_day}
+					day={date.day}
+					items={date.items}
+				/>
+			))}
+		</>
 	);
 };
 
@@ -99,9 +133,9 @@ const Product: React.FC<ProductProps> = ({
 				</ProductTitle>
 			)}
 			{text && (
-				<BodyText>
+				<ProductBody>
 					<Text content={text} />
-				</BodyText>
+				</ProductBody>
 			)}
 			{link.label && link.link && (
 				<Button href={hrefResolver(link.link)} target="_blank">

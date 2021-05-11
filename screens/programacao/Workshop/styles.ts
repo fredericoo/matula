@@ -80,8 +80,8 @@ export const Table = styled.dl`
 `;
 
 export const VideoEmbed = styled.div`
-	width: calc(100% + 4rem);
-	transform: translateX(-2rem);
+	width: calc(100% + 2rem);
+	transform: translateX(-1rem);
 	height: 0px;
 	position: relative;
 	padding-bottom: 56.18%;
@@ -92,4 +92,12 @@ export const VideoEmbed = styled.div`
 		top: 0;
 		left: 0;
 	}
+`;
+
+export const ThumbnailCol = styled.div`
+	width: calc(100% + 2rem);
+	transform: translateX(-1rem);
+	height: 0px;
+	position: relative;
+	padding-bottom: 56.18%;
 `;

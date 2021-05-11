@@ -81,6 +81,12 @@ export const getStaticProps = async ({ params, locale }) => {
 			"oficina.start",
 			"oficina.end",
 			"oficina.by",
+			"sugestoes.photo",
+			"sugestoes.s_restaurant",
+			"sugestoes.s_title",
+			"sugestoes.s_short",
+			"sugestoes.s_bioma",
+			"sugestoes.s_link",
 		],
 	});
 	return {

@@ -6,6 +6,7 @@ import { hatchBackground } from "app/theme/effects";
 
 export const StyledGrid = styled(Grid)`
 	padding: 1rem;
+	margin-bottom: 4rem;
 `;
 
 export const PageHeading = styled.h1`
@@ -38,6 +39,10 @@ export const ProductTitle = styled.h2`
 	color: ${({ theme }) => theme.color.secondary};
 
 	font-size: ${constants.typography.size.vlarge};
+`;
+
+export const ProductBody = styled(BodyText)`
+	margin-bottom: 1rem;
 `;
 
 export const ProductLogo = styled.div`

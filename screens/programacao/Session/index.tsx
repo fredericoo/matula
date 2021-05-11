@@ -1,6 +1,4 @@
 import { Moment } from "moment";
-import styled from "styled-components";
-import constants from "app/theme/constants";
 import Text from "app/components/Text";
 import Entry from "../Entry";
 import { RichText } from "prismic-reactjs";
