@@ -83,8 +83,12 @@ const Film: React.FC<Film> = ({ data }) => {
 				image={data.seo_img?.url}
 			/>
 			<Header>
-				{playing === "film" && data.embed.html && (
-					<VideoEmbed dangerouslySetInnerHTML={{ __html: data.embed.html }} />
+				{playing === "film" && (data.embed.html || data.embed_code) && (
+					<VideoEmbed
+						dangerouslySetInnerHTML={{
+							__html: data.embed.html || data.embed_code,
+						}}
+					/>
 				)}
 				{isVideo ? (
 					<>
