@@ -20,7 +20,7 @@ export const StyledFrame = styled.div`
 		grid:
 			"logo content content content" min-content
 			"nav content content content" minmax(100px, 1fr)
-			"footer tools tools icons" min-content / min-content 1fr min-content;
+			"footer tools tools tools" min-content / min-content 1fr min-content;
 		border: solid ${({ theme }) => theme.color.border};
 		border-width: 0 0 1px 1px;
 	}
