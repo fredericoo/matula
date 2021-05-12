@@ -191,7 +191,25 @@ const Film: React.FC<Film> = ({ data }) => {
 							>
 								Assistir ao filme
 							</Button>
-							{!isAvailable && (
+							{isAvailable ? (
+								<small>
+									<>
+										disponível por{" "}
+										{tillEnd.asDays() > 1 ? (
+											<span>
+												{Math.floor(tillEnd.asDays())} dia
+												{Math.floor(tillEnd.asDays()) > 1 ? "s" : ""}
+											</span>
+										) : (
+											<span>
+												{String(tillEnd.hours()).padStart(2, "0")}:
+												{String(tillEnd.minutes()).padStart(2, "0")}:
+												{String(tillEnd.seconds()).padStart(2, "0")}
+											</span>
+										)}
+									</>
+								</small>
+							) : (
 								<small>
 									{tillEnd.asSeconds() > 0 ? (
 										<>
