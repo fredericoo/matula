@@ -39,17 +39,12 @@ export type Author = {
 };
 
 const Player: React.FC<Workshop> = ({ data }) => {
-	const now = useCurrentTime();
-	const tillStart = moment.duration(moment(data.start).diff(now));
-
-	const isAvailable = tillStart.asSeconds() <= 0;
-
-	if (isAvailable && (data.embed?.html || data.embed_code))
+	if (data.embed?.html)
 		return (
 			<Grid.Col>
 				<VideoEmbed
 					dangerouslySetInnerHTML={{
-						__html: data.embed_code || data.embed.html,
+						__html: data.embed.html,
 					}}
 				/>
 			</Grid.Col>
