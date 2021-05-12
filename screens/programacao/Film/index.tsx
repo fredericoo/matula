@@ -199,7 +199,7 @@ const Film: React.FC<Film> = ({ data }) => {
 											{tillStart.asDays() > 1 ? (
 												<span>
 													{Math.floor(tillStart.asDays())} dia
-													{tillStart.asDays() > 1 ? "s" : ""}
+													{Math.floor(tillStart.asDays()) > 1 ? "s" : ""}
 												</span>
 											) : (
 												<span>
