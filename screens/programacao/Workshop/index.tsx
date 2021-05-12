@@ -44,12 +44,12 @@ const Player: React.FC<Workshop> = ({ data }) => {
 
 	const isAvailable = true;
 
-	if (!isAvailable && (data.embed?.html || data.embed_code))
+	if (isAvailable && data.embed.html)
 		return (
 			<Grid.Col>
 				<VideoEmbed
 					dangerouslySetInnerHTML={{
-						__html: data.embed_code || data.embed.html,
+						__html: data.embed.html,
 					}}
 				/>
 			</Grid.Col>
