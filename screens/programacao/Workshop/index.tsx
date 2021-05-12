@@ -19,6 +19,7 @@ import SEO from "app/components/SEO";
 import useCurrentTime from "app/utils/hooks/useCurrentTime";
 import { groupHasItems } from "app/utils/prismic";
 import { RestaurantItem, Biome, Links, ChefTitle } from "../Film/styles";
+import React from "react";
 
 type Workshop = {
 	data: any;
@@ -43,12 +44,12 @@ const Player: React.FC<Workshop> = ({ data }) => {
 
 	const isAvailable = tillStart.asSeconds() <= 0;
 
-	if (isAvailable && (data.embed?.html || data.embed_code))
+	if (!isAvailable && (data.embed?.html || data.embed_code))
 		return (
 			<Grid.Col>
 				<VideoEmbed
 					dangerouslySetInnerHTML={{
-						__html: data.embed.html || data.embed_code,
+						__html: data.embed_code || data.embed.html,
 					}}
 				/>
 			</Grid.Col>
@@ -101,10 +102,10 @@ const Workshop: React.FC<Workshop> = ({ data }) => {
 
 					{data.by &&
 						data.by.map(({ task, doer }: Author) => (
-							<>
+							<React.Fragment key={task + doer}>
 								<dt>{task}</dt>
 								<dd>{doer}</dd>
-							</>
+							</React.Fragment>
 						))}
 				</Table>
 			</Grid.Col>
@@ -116,7 +117,7 @@ const Workshop: React.FC<Workshop> = ({ data }) => {
 			</RightCol>
 			{data.by &&
 				data.by.map(({ photo, task, doer, bio }: Author) => (
-					<>
+					<React.Fragment key={doer}>
 						<Grid.Col lg="col-2 / col-4">
 							{photo?.url && (
 								<Picture
@@ -138,7 +139,7 @@ const Workshop: React.FC<Workshop> = ({ data }) => {
 								<Text content={bio} />
 							</BodyText>
 						</RightCol>
-					</>
+					</React.Fragment>
 				))}
 
 			{groupHasItems(data.chef) && data.chef[0]?.chef_item?.data?.s_title && (
