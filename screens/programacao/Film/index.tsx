@@ -38,7 +38,7 @@ const Film: React.FC<Film> = ({ data }) => {
 	const tillStart = moment.duration(moment(data.start).diff(now));
 	const tillEnd = moment.duration(moment(data.end).diff(now));
 
-	const isAvailable = tillStart.asSeconds() <= 0 && tillEnd.asSeconds() >= 0;
+	const isAvailable = true;
 
 	const isVideo =
 		data.trailer.url && data.trailer.url.match(/\.(mp4|mov|webm)$/);

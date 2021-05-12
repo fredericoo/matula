@@ -42,7 +42,7 @@ const Player: React.FC<Workshop> = ({ data }) => {
 	const now = useCurrentTime();
 	const tillStart = moment.duration(moment(data.start).diff(now));
 
-	const isAvailable = tillStart.asSeconds() <= 0;
+	const isAvailable = true;
 
 	if (!isAvailable && (data.embed?.html || data.embed_code))
 		return (
