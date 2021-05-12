@@ -44,7 +44,7 @@ const Player: React.FC<Workshop> = ({ data }) => {
 
 	const isAvailable = tillStart.asSeconds() <= 0;
 
-	if (!isAvailable && (data.embed?.html || data.embed_code))
+	if (isAvailable && (data.embed?.html || data.embed_code))
 		return (
 			<Grid.Col>
 				<VideoEmbed
