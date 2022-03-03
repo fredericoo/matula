@@ -34,6 +34,8 @@ const Picture: React.FC<ImageProps & Picture> = (props) => {
 		}
 	};
 
+	if (typeof props.src !== 'string') return null;
+
 	return (
 		<Wrapper hasLoaded={hasLoaded} bg={props.bg} className={props.className}>
 			<StyledImage
