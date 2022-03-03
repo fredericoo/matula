@@ -1,5 +1,4 @@
 import "../styles/globals.scss";
-import { AppProps } from "next/dist/next-server/lib/router/router";
 import { useState, useEffect } from "react";
 import TBD from "components/TBD";
 import moment from "moment";
@@ -14,9 +13,10 @@ import { ConfigProvider } from "app/utils/hooks/useConfig";
 import { CurrentTimeProvider } from "app/utils/hooks/useCurrentTime";
 import { useRouter } from "next/router";
 import * as gtag from "../utils/gtag";
+import { AppComponent } from "next/dist/shared/lib/router/router";
 
-function App({ Component, pageProps }: AppProps): JSX.Element {
-	const releaseDate = moment(); // moment("2021-05-13", "YYYY-MM-DD");
+const App: AppComponent = ({ Component, pageProps }) => {
+	const releaseDate = moment();
 	const alreadyReleased =
 		moment.duration(releaseDate.diff(moment())).asSeconds() <= 0;
 	const [released, setReleased] = useState(alreadyReleased);
