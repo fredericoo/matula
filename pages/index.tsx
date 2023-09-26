@@ -130,11 +130,10 @@ export async function getStaticProps({ locale }) {
 
 	if (doc) {
 		return {
-			revalidate: 600,
 			props: {
 				doc: doc || {},
 			},
 		};
 	}
-	return { revalidate: 60, props: { doc: {} } };
+	return { props: { doc: {} } };
 }
