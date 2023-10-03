@@ -1,47 +1,25 @@
-import { Screen } from "app/pages/[type]";
 import Grid from "app/components/Grid";
 import { StyledGrid, Title } from "./style";
 import Text from "app/components/Text";
-import { Client } from "app/utils/prismic";
 import { useRouter } from "next/router";
-import useSWR from "swr";
 import BodyText from "app/components/BodyText";
 import Builder from "./components/Builder";
 import Button from "app/components/Button";
 
 import { useRef } from "react";
 
-const Stories: React.FC<Screen> = ({ data }) => {
+const Stories = ({ programacao }) => {
 	const { locale } = useRouter();
 	const storiesRef = useRef<HTMLDivElement>(null);
-
-	async function fetcher(_endpoint: string) {
-		const client = Client();
-
-		const doc = await client.getSingle("programacao", {
-			lang: locale,
-			fetchLinks: [
-				"sessao.title",
-				"sessao.start",
-				"oficina.title",
-				"oficina.start",
-			],
-		});
-
-		return doc;
-	}
-	const { data: programacao } = useSWR("stories", fetcher, {
-		revalidateOnFocus: false,
-	});
 
 	return (
 		<StyledGrid sm="10">
 			<Grid.Col lg="grid-start / col-4">
 				<Title>
-					<Text content={data.title} asText />
+					<Text content={"asdsa"} asText />
 				</Title>
 				<BodyText>
-					<Text content={data.text} />
+					<Text content={"asdasd"} />
 				</BodyText>
 			</Grid.Col>
 
@@ -82,5 +60,7 @@ const Stories: React.FC<Screen> = ({ data }) => {
 		</StyledGrid>
 	);
 };
+
+
 
 export default Stories;

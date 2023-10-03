@@ -81,11 +81,6 @@ const Programacao: React.FC<Screen & Programacao> = ({ data, current }) => {
 						/>
 					))}
 				</Sessions>
-				<Stories>
-					<Link href="/stories">
-						<a>Monte a sua</a>
-					</Link>
-				</Stories>
 			</NavCol>
 			<ContentCol ref={contentRef} md="col-4 / grid-end">
 				{Current ? (

@@ -1,6 +1,7 @@
 import { Client } from "app/utils/prismic";
 import Prismic from "prismic-javascript";
 import Event from "app/screens/event";
+import { getLayoutData } from "app/components/Layout/layout.data";
 
 export const getStaticPaths = async () => {
 	const client = Client();
@@ -24,6 +25,7 @@ export const getStaticPaths = async () => {
 
 export const getStaticProps = async ({ params, locale }) => {
 	const client = Client();
+	const config = await getLayoutData(locale);
 	const doc = await client.getSingle("programacao", {
 		lang: locale,
 		fetchLinks: [
@@ -54,7 +56,7 @@ export const getStaticProps = async ({ params, locale }) => {
 		}
 	);
 	return {
-		props: { doc: doc || {}, page: page || {} },
+		props: { doc: doc || {}, page: page || {}, config },
 	};
 };
 

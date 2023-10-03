@@ -1,12 +1,11 @@
 import styled from "styled-components";
 import Picture from "../Picture";
-import { useConfig } from "app/utils/hooks/useConfig";
 import Text from "../Text";
 import BodyText from "../BodyText";
 import constants from "app/theme/constants";
+import { Document } from "prismic-javascript/types/documents";
 
-const Tools = () => {
-	const { data: config } = useConfig();
+const Tools = ({config}: {config: Document}) => {
 	const sponsorImg = config?.data.sponsor_img;
 
 	return (

@@ -9,7 +9,6 @@ import Navigation from "components/Navigation";
 import Footer from "components/Footer";
 import Tools from "components/Tools";
 import Logo from "components/Logo";
-import { ConfigProvider } from "app/utils/hooks/useConfig";
 import { CurrentTimeProvider } from "app/utils/hooks/useCurrentTime";
 import { useRouter } from "next/router";
 import * as gtag from "../utils/gtag";
@@ -35,28 +34,7 @@ const App: AppComponent = ({ Component, pageProps }) => {
 	return (
 		<ThemeProvider theme={theme}>
 			{released ? (
-				<CurrentTimeProvider>
-					<ConfigProvider>
-						<Frame>
-							<Frame.Section gridArea="logo" sticky={0} z={100}>
-								<Logo />
-							</Frame.Section>
-							<Frame.Section gridArea="content">
-								<Component {...pageProps} />
-							</Frame.Section>
-							<Frame.Section gridArea="nav" z={100}>
-								<Navigation />
-							</Frame.Section>
-							<Frame.Section gridArea="tools">
-								<Tools />
-							</Frame.Section>
-							<Frame.Section gridArea="footer">
-								<Footer />
-							</Frame.Section>
-							<Frame.Section gridArea="icons"></Frame.Section>
-						</Frame>
-					</ConfigProvider>
-				</CurrentTimeProvider>
+				<Component {...pageProps} />
 			) : (
 				<TBD
 					date={releaseDate}

@@ -1,6 +1,7 @@
 import { Client } from "app/utils/prismic";
 import Prismic from "prismic-javascript";
 import Event from "app/screens/event";
+import { getLayoutData } from "app/components/Layout/layout.data";
 
 export const getStaticPaths = async () => {
 	const client = Client();
@@ -39,6 +40,7 @@ export const getStaticProps = async ({ params, locale }) => {
 			"oficina.by",
 		],
 	});
+	const config = await getLayoutData(locale);
 	const page = await client.query(
 		Prismic.Predicates.at("my.sessao.uid", params.uid),
 		{
@@ -54,7 +56,7 @@ export const getStaticProps = async ({ params, locale }) => {
 		}
 	);
 	return {
-		props: { doc: doc || {}, page: page || {} },
+		props: { doc: doc || {}, page: page || {}, config },
 	};
 };
 
